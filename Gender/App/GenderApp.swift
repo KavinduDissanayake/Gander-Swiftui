@@ -11,7 +11,8 @@ import SwiftUI
 struct GenderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .applyViewRoutes()
         }
     }
 }

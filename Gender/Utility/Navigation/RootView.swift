@@ -24,8 +24,8 @@ struct RootView: View {
         switch router.currentRoot {
         case .login:
             LoginView()
-        case .home:
-            HomeView()
+        case .bottomTabs:
+            BottomTabView()
         }
     }
 }

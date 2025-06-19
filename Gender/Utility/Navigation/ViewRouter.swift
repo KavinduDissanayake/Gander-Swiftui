@@ -9,6 +9,7 @@ import SwiftUI
 // MARK: - Cache Keys
 enum CacheKeys {
     static let isAuthenticated = "isAuthenticated"
+    static let articleHisotry = "articalHistory"
 }
 
 
@@ -17,7 +18,7 @@ enum CacheKeys {
 // MARK: - Routing Enum
 enum Roots {
     case login
-    case home
+    case bottomTabs
 }
 
 // MARK: - View Router
@@ -29,7 +30,7 @@ class ViewRouter: ObservableObject {
     static let shared = ViewRouter()
 
     fileprivate init() {
-        currentRoot = isAuthenticated ? .home : .login
+        currentRoot = isAuthenticated ? .bottomTabs : .login
     }
 }
 
