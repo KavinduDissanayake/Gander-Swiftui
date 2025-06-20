@@ -56,5 +56,4 @@ import SwiftUI
         status: .verified
     )
     .padding()
-    .previewLayout(.sizeThatFits)
 }

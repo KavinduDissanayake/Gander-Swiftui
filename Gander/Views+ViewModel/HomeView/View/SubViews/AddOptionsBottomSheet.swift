@@ -32,6 +32,7 @@ struct AddOptionRow: View {
 
                 Image(systemName: "chevron.right")
                     .foregroundColor(.tint)
+                   
             }
             .padding()
             .background(Color(uiColor: .systemGray6))

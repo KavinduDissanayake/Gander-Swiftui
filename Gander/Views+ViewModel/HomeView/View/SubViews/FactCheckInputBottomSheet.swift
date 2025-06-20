@@ -30,7 +30,9 @@ struct FactCheckInputBottomSheet: BottomPopup {
             HStack {
                 Spacer()
                 Button(action: {
-                    viewModel.isBottomSheetVisible = false
+                    Task{
+                        await dismissLastPopup()
+                    }
                 }) {
                     Image(systemName: "xmark")
                         .font(.system(size: 16, weight: .semibold))
@@ -120,9 +122,3 @@ struct FactCheckInputBottomSheet: BottomPopup {
 }
 
 
-#if DEBUG
-#Preview{
-    FactCheckInputBottomSheet(inputURL:.constant(""), viewModel: HomeViewModel.mock)
-        .padding()
-}
-#endif

@@ -10,8 +10,6 @@ import SwiftUI
 struct CustomTabBar: View {
     @Binding var selectedTab: Int
     let items: [TabItem]
-    let onFloatingButtonTap: () -> Void
-    
     // Customizable properties
     var tabBarHeight: CGFloat = 56
     var backgroundColor: Color = Color(.systemBackground)
@@ -52,11 +50,7 @@ struct CustomTabBar: View {
             TabItem(id: 0, title: "Home", icon: "house", selectedIcon: "house.fill"),
             TabItem(id: 1, title: "Search", icon: "magnifyingglass"),
             TabItem(id: 2, title: "Profile", icon: "person", selectedIcon: "person.fill")
-        ],
-        onFloatingButtonTap: {
-            print("Floating button tapped in preview")
-        }
+        ]
     )
-    .previewLayout(.sizeThatFits)
     .padding()
 }

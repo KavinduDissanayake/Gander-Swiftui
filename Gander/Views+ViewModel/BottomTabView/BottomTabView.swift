@@ -37,11 +37,7 @@ struct BottomTabView: View {
             // Custom Tab Bar
             CustomTabBar(
                 selectedTab: $selectedTab,
-                items: tabItems,
-                onFloatingButtonTap: {
-                    // Handle floating button tap
-                    print("Floating button tapped!")
-                }
+                items: tabItems
             )
         }
         .background(Color(.systemGray6))
@@ -62,8 +58,7 @@ struct BottomTabView: View {
             TabItem(id: 0, title: "Home", icon: "house", selectedIcon: "house.fill"),
             TabItem(id: 1, title: "Search", icon: "magnifyingglass"),
             TabItem(id: 2, title: "Profile", icon: "person", selectedIcon: "person.fill")
-        ],
-        onFloatingButtonTap: { print("Floating button tapped in preview") }
+        ]
     )
     .padding()
 }

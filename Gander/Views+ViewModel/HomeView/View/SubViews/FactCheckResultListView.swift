@@ -47,9 +47,3 @@ struct FactCheckResultListView: View {
     }
 }
 
-#Preview("FactCheckResultListView") {
-    FactCheckResultListView(
-        articles: .constant(FactCheckArticle.mockMultiple),
-        viewModel: HomeViewModel.mock
-    )
-}

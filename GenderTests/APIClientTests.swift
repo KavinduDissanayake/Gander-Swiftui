@@ -1,29 +1,27 @@
-//
-//  APIClientTests.swift
-//  Gender
-//
-//  Created by Kavindu Dissanayake on 2025-06-20.
-//
-
-
 import Foundation
 import Testing
-@testable import Gender
+@testable import Gander
 
 struct APIClientTests {
 
     struct MockResponse: Codable, Equatable {
-        let message: String
+        let userId: Int
+        let id: Int
+        let title: String
+        let body: String
     }
 
     @Test
     func testSuccessfulRequest() async throws {
         // Arrange
         let mockURL = "https://jsonplaceholder.typicode.com/posts/1"
+
+        // Act
         let response: MockResponse = try await APIClient.shared.request(to: mockURL)
 
         // Assert
-        #expect(!response.message.isEmpty)
+        #expect(response.id == 1)
+        #expect(!response.title.isEmpty)
     }
 
     @Test
@@ -37,13 +35,26 @@ struct APIClientTests {
     }
 
     @Test
-    func testNoInternetThrowsError() async throws {
-        // This test assumes no network, mock reachability in real case
-        // Not testable without mocking, so just check the error mapping logic
-        let unreachableClient = APIClient()
+    func testRequestWithTimeout() async throws {
+        do {
+            let _: MockResponse = try await APIClient.shared.request(
+                to: "https://jsonplaceholder.typicode.com/posts/1",
+                timeoutInterval: 0.0001
+            )
+            #expect(false)
+        } catch {
+            #expect(error is APIClientError)
+        }
+    }
+
+    @Test
+    func testDecodeFailureThrowsError() async throws {
+        struct WrongModel: Codable {
+            let nonExistentField: String
+        }
 
         do {
-            let _: MockResponse = try await unreachableClient.request(to: "https://someurl.com")
+            let _: WrongModel = try await APIClient.shared.request(to: "https://jsonplaceholder.typicode.com/posts/1")
             #expect(false)
         } catch {
             #expect(error is APIClientError)

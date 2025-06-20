@@ -52,5 +52,4 @@ struct TabBarItem: View {
         )
     }
     .padding()
-    .previewLayout(.sizeThatFits)
 }
