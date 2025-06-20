@@ -9,7 +9,7 @@ import SwiftUI
 // MARK: - Cache Keys
 enum CacheKeys {
     static let isAuthenticated = "isAuthenticated"
-    static let articleHisotry = "articalHistory"
+    static let articleHistory = "articleHistory"
 }
 
 
