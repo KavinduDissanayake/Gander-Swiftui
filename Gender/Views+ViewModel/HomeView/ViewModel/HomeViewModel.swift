@@ -5,54 +5,64 @@
 //  Created by KavinduDissanayake on 2025-06-20.
 //
 
+// MARK: - Imports
 import SwiftUI
 import SwiftSoup
 
-
+// MARK: - ViewModel
 @MainActor
 class HomeViewModel: ObservableObject {
+
+    // MARK: - Published Properties
     @Published var currentArticle: FactCheckArticle? = nil
     @Published var isLoading: Bool = false
-    
     @Published var isNavigateToDetails: Bool = false
-    
-    @CodableAppStorage(CacheKeys.articleHisotry) var savedArticles: [FactCheckArticle] = [] {
-        didSet {
-            updateFilteredArticles()
-        }
-    }
     @Published var filteredArticles: [FactCheckArticle] = []
     @Published var selectedLabel: String = "All" {
         didSet {
             updateFilteredArticles()
         }
     }
-
     @Published var inputURL: String = ""
     @Published var isBottomSheetVisible: Bool = false
-  
     @Published var errorMessage: String?
     @Published var selectedTab = 0
 
-
-     func updateFilteredArticles() {
-        if selectedLabel == "All" {
-            filteredArticles = savedArticles
-        } else {
-            filteredArticles = savedArticles.filter { $0.status == selectedLabel }
+    // MARK: - Stored Articles
+    @CodableAppStorage(CacheKeys.articleHisotry) var savedArticles: [FactCheckArticle] = [] {
+        didSet {
+            updateFilteredArticles()
         }
     }
 
-    init(){
+    // MARK: - Init
+    init() {
         self.updateFilteredArticles()
     }
 
+    // MARK: - Article Filtering
+    func updateFilteredArticles() {
+        filteredArticles = selectedLabel == "All"
+            ? savedArticles
+            : savedArticles.filter { $0.status == selectedLabel }
+    }
+
+    func deleteArticle(_ article: FactCheckArticle) {
+        let updatedArticles = savedArticles.filter { $0.id != article.id }
+        savedArticles = updatedArticles
+        if currentArticle?.id == article.id {
+            currentArticle = nil
+        }
+        updateFilteredArticles()
+    }
+
+    // MARK: - Load & Scrape Article
     func loadArticle(from urlString: String) {
         guard let url = URL(string: urlString) else {
             handleError(APIClientError.invalidURL)
             return
         }
-        
+
         isLoading = true
         errorMessage = nil
 
@@ -61,8 +71,6 @@ class HomeViewModel: ObservableObject {
                 let article = try await scrapeArticle(from: url, urlString: urlString)
                 self.currentArticle = article
                 self.savedArticles.insert(article, at: 0)
-                
-                // Start fact-checking
                 await submitFactCheck(for: article)
                 updateFilteredArticles()
             } catch {
@@ -70,7 +78,7 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func scrapeArticle(from url: URL, urlString: String) async throws -> FactCheckArticle {
         let (data, _) = try await URLSession.shared.data(from: url)
         guard let htmlString = String(data: data, encoding: .utf8) else {
@@ -97,9 +105,8 @@ class HomeViewModel: ObservableObject {
                 break
             }
         }
-        
+
         if body.isEmpty {
-            // Fallback to all paragraphs
             let allParagraphs = try doc.select("p").array()
             body = allParagraphs.compactMap { try? $0.text() }.joined(separator: "\n\n")
         }
@@ -115,22 +122,10 @@ class HomeViewModel: ObservableObject {
         )
     }
 
+    // MARK: - Submit Fact Check
     private func submitFactCheck(for article: FactCheckArticle) async {
         guard article.url.contains("nytimes.com") else {
-            let fallbackSource = FactSource(
-                title: article.headline,
-                date: article.dateSaved.formatted(date: .abbreviated, time: .omitted),
-                sourceImageURL: "",
-                thumbnailImageURL: "",
-                url: article.url
-            )
-            updateArticleStatus(
-                articleId: article.id,
-                status: .unverified,
-                rationale: "The provided article is not from a trusted NYTimes source and cannot be verified.",
-                sources: [fallbackSource]
-            )
-            isLoading = false
+            handleUnverifiableArticle(article)
             return
         }
 
@@ -146,7 +141,6 @@ class HomeViewModel: ObservableObject {
                 parameters: endpoint.parameters,
                 headers: endpoint.headers
             )
-
             let response = try outerResponse.toFactCheckResponse()
             let status = FactCheckStatus(from: response.status ?? "")
             updateArticleStatus(
@@ -158,31 +152,52 @@ class HomeViewModel: ObservableObject {
         } catch {
             Logger.log(logType: .error, title: "FactCheck", message: error.localizedDescription)
             handleError(error)
-            let fallbackSource = FactSource(
-                title: article.headline,
-                date: article.dateSaved.formatted(date: .abbreviated, time: .omitted),
-                sourceImageURL: article.imageURL ?? "",
-                thumbnailImageURL: article.imageURL ?? "",
-                url: article.url
-            )
-            updateArticleStatus(
-                articleId: article.id,
-                status: .unknown,
-                rationale: "Error occurred during fact-checking: \(error.localizedDescription)",
-                sources: [fallbackSource]
-            )
+            handleUnknownStatus(article, error: error)
         }
 
         isLoading = false
     }
-    
+
+    private func handleUnverifiableArticle(_ article: FactCheckArticle) {
+        let fallbackSource = FactSource(
+            title: article.headline,
+            date: article.dateSaved.formatted(date: .abbreviated, time: .omitted),
+            sourceImageURL: "",
+            thumbnailImageURL: "",
+            url: article.url
+        )
+        updateArticleStatus(
+            articleId: article.id,
+            status: .unverified,
+            rationale: "The provided article is not from a trusted NYTimes source and cannot be verified.",
+            sources: [fallbackSource]
+        )
+        isLoading = false
+    }
+
+    private func handleUnknownStatus(_ article: FactCheckArticle, error: Error) {
+        let fallbackSource = FactSource(
+            title: article.headline,
+            date: article.dateSaved.formatted(date: .abbreviated, time: .omitted),
+            sourceImageURL: article.imageURL ?? "",
+            thumbnailImageURL: article.imageURL ?? "",
+            url: article.url
+        )
+        updateArticleStatus(
+            articleId: article.id,
+            status: .unknown,
+            rationale: "Error occurred during fact-checking: \(error.localizedDescription)",
+            sources: [fallbackSource]
+        )
+    }
+
+    // MARK: - Status Updates
     private func updateArticleStatus(articleId: UUID, status: FactCheckStatus, rationale: String, sources: [FactSource]) {
         if let index = savedArticles.firstIndex(where: { $0.id == articleId }) {
             savedArticles[index].status = status.rawValue
             savedArticles[index].rationale = rationale
             savedArticles[index].sources = sources
 
-            // Persist changes
             let updated = savedArticles
             savedArticles = updated
 
@@ -192,26 +207,17 @@ class HomeViewModel: ObservableObject {
             updateFilteredArticles()
         }
     }
-    
+
+    // MARK: - Utilities
     private func handleError(_ error: Error) {
         errorMessage = error.localizedDescription
         isLoading = false
     }
-    
+
     func clearError() {
         errorMessage = nil
     }
-    
-    func deleteArticle(_ article: FactCheckArticle) {
-        let updatedArticles = savedArticles.filter { $0.id != article.id }
-        savedArticles = updatedArticles
-        if currentArticle?.id == article.id {
-            currentArticle = nil
-        }
-        updateFilteredArticles()
-    }
 
-    // Share Article Method
     func shareArticle(_ article: FactCheckArticle) {
         let shareText = "Fact-check result: \(article.headline) - \(article.factCheckStatus.displayName)"
         let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
@@ -220,8 +226,8 @@ class HomeViewModel: ObservableObject {
             window.rootViewController?.present(activityVC, animated: true)
         }
     }
-    
-    // Present Bottom Sheet Method
+
+    // MARK: - Sheet Presentation
     func presentInputBottomSheet() {
         Task {
             await FactCheckInputBottomSheet(
@@ -230,16 +236,12 @@ class HomeViewModel: ObservableObject {
             ).present()
         }
     }
-    
-    
-    func showChoseBootmSheet(){
+
+    func showChoseBootmSheet() {
         Task {
             await AddOptionsBottomSheet(onSelectImage: {}, onSelectLink: {
                 self.presentInputBottomSheet()
             }).present()
-            
         }
     }
 }
-
-  
