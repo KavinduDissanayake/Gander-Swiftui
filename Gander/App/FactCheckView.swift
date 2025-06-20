@@ -10,16 +10,6 @@
 
 import SwiftUI
 
-
-// MARK: - Private Components
-
-
-
-
-
-
-
-//
 struct SourceRowView: View {
     let source: FactSource
 

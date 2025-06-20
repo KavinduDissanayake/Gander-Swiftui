@@ -44,12 +44,12 @@ class APIClient {
     static let shared = APIClient()
     private let session: Session
 
-    private init() {
+     init() {
         self.session = Session()
     }
 
     // MARK: - Async JSON API Request
-    func request<T: Decodable>(
+   public func request<T: Decodable>(
         to endpoint: String,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil,

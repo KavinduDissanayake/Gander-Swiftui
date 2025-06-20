@@ -24,27 +24,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CFB391212E048EEC004165D4 /* Gender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gender.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CFB3A9142E050A64004165D4 /* GenderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFB391212E048EEC004165D4 /* Gander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gander.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFB3A9142E050A64004165D4 /* GanderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GanderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		CFB3A91E2E050AFA004165D4 /* Exceptions for "Gender" folder in "GenderTests" target */ = {
+		CFA531E72E051709005CA863 /* Exceptions for "Gander" folder in "GanderTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Views+ViewModel/HomeView/ViewModel/HomeViewModel.swift",
+				"Utility/Extensions/Optional++.swift",
 			);
-			target = CFB3A9132E050A64004165D4 /* GenderTests */;
+			target = CFB3A9132E050A64004165D4 /* GanderTests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		CFB391232E048EEC004165D4 /* Gender */ = {
+		CFB391232E048EEC004165D4 /* Gander */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				CFB3A91E2E050AFA004165D4 /* Exceptions for "Gender" folder in "GenderTests" target */,
+				CFA531E72E051709005CA863 /* Exceptions for "Gander" folder in "GanderTests" target */,
 			);
-			path = Gender;
+			path = Gander;
 			sourceTree = "<group>";
 		};
 		CFB3A9152E050A64004165D4 /* GenderTests */ = {
@@ -79,7 +79,7 @@
 		CFB391182E048EEC004165D4 = {
 			isa = PBXGroup;
 			children = (
-				CFB391232E048EEC004165D4 /* Gender */,
+				CFB391232E048EEC004165D4 /* Gander */,
 				CFB3A9152E050A64004165D4 /* GenderTests */,
 				CFB391222E048EEC004165D4 /* Products */,
 			);
@@ -88,8 +88,8 @@
 		CFB391222E048EEC004165D4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CFB391212E048EEC004165D4 /* Gender.app */,
-				CFB3A9142E050A64004165D4 /* GenderTests.xctest */,
+				CFB391212E048EEC004165D4 /* Gander.app */,
+				CFB3A9142E050A64004165D4 /* GanderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,9 +97,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CFB391202E048EEC004165D4 /* Gender */ = {
+		CFB391202E048EEC004165D4 /* Gander */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CFB391302E048EED004165D4 /* Build configuration list for PBXNativeTarget "Gender" */;
+			buildConfigurationList = CFB391302E048EED004165D4 /* Build configuration list for PBXNativeTarget "Gander" */;
 			buildPhases = (
 				CFB3911D2E048EEC004165D4 /* Sources */,
 				CFB3911E2E048EEC004165D4 /* Frameworks */,
@@ -110,9 +110,9 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				CFB391232E048EEC004165D4 /* Gender */,
+				CFB391232E048EEC004165D4 /* Gander */,
 			);
-			name = Gender;
+			name = Gander;
 			packageProductDependencies = (
 				CFB3919A2E04985D004165D4 /* Alamofire */,
 				CFB391AF2E04A055004165D4 /* SwiftSoup */,
@@ -120,12 +120,12 @@
 				CFB391E52E04FFF9004165D4 /* MijickPopups */,
 			);
 			productName = Gender;
-			productReference = CFB391212E048EEC004165D4 /* Gender.app */;
+			productReference = CFB391212E048EEC004165D4 /* Gander.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CFB3A9132E050A64004165D4 /* GenderTests */ = {
+		CFB3A9132E050A64004165D4 /* GanderTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CFB3A91A2E050A65004165D4 /* Build configuration list for PBXNativeTarget "GenderTests" */;
+			buildConfigurationList = CFB3A91A2E050A65004165D4 /* Build configuration list for PBXNativeTarget "GanderTests" */;
 			buildPhases = (
 				CFB3A9102E050A64004165D4 /* Sources */,
 				CFB3A9112E050A64004165D4 /* Frameworks */,
@@ -137,13 +137,14 @@
 				CFB3A9192E050A65004165D4 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				CFB391232E048EEC004165D4 /* Gander */,
 				CFB3A9152E050A64004165D4 /* GenderTests */,
 			);
-			name = GenderTests;
+			name = GanderTests;
 			packageProductDependencies = (
 			);
 			productName = GenderTests;
-			productReference = CFB3A9142E050A64004165D4 /* GenderTests.xctest */;
+			productReference = CFB3A9142E050A64004165D4 /* GanderTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -165,7 +166,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CFB3911C2E048EEC004165D4 /* Build configuration list for PBXProject "Gender" */;
+			buildConfigurationList = CFB3911C2E048EEC004165D4 /* Build configuration list for PBXProject "Gander" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -185,8 +186,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CFB391202E048EEC004165D4 /* Gender */,
-				CFB3A9132E050A64004165D4 /* GenderTests */,
+				CFB391202E048EEC004165D4 /* Gander */,
+				CFB3A9132E050A64004165D4 /* GanderTests */,
 			);
 		};
 /* End PBXProject section */
@@ -228,7 +229,7 @@
 /* Begin PBXTargetDependency section */
 		CFB3A9192E050A65004165D4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CFB391202E048EEC004165D4 /* Gender */;
+			target = CFB391202E048EEC004165D4 /* Gander */;
 			targetProxy = CFB3A9182E050A65004165D4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -353,10 +354,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Gender/SupportFiles/Gender.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Gander/SupportFiles/Gander.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Gender/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Gander/Preview Content\"";
 				DEVELOPMENT_TEAM = NPXX324A2L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -392,10 +393,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Gender/SupportFiles/Gender.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Gander/SupportFiles/Gander.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Gender/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Gander/Preview Content\"";
 				DEVELOPMENT_TEAM = NPXX324A2L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -442,7 +443,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gender.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gender";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gander.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gander";
 			};
 			name = Debug;
 		};
@@ -462,7 +463,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gender.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gender";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gander.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gander";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -470,7 +471,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CFB3911C2E048EEC004165D4 /* Build configuration list for PBXProject "Gender" */ = {
+		CFB3911C2E048EEC004165D4 /* Build configuration list for PBXProject "Gander" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CFB3912E2E048EED004165D4 /* Debug */,
@@ -479,7 +480,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CFB391302E048EED004165D4 /* Build configuration list for PBXNativeTarget "Gender" */ = {
+		CFB391302E048EED004165D4 /* Build configuration list for PBXNativeTarget "Gander" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CFB391312E048EED004165D4 /* Debug */,
@@ -488,7 +489,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CFB3A91A2E050A65004165D4 /* Build configuration list for PBXNativeTarget "GenderTests" */ = {
+		CFB3A91A2E050A65004165D4 /* Build configuration list for PBXNativeTarget "GanderTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CFB3A91B2E050A65004165D4 /* Debug */,

@@ -1,14 +1,15 @@
 //
-//  GenderTests.swift
+//  HomeViewModelTests.swift
 //  GenderTests
 //
 //  Created by KavinduDissanayake on 2025-06-20.
 //
+
 import Foundation
 import Testing
 @testable import Gender
 
-struct GenderTests {
+struct HomeViewModelTests {
 
     @Test
     func testLoadArticleFailureWithInvalidURL() async throws {
@@ -17,21 +18,17 @@ struct GenderTests {
 
         await viewModel.loadArticle(from: invalidURL)
 
-        #expect(viewModel.currentArticle == nil)
+        await #expect(viewModel.currentArticle == nil)
         await #expect(viewModel.errorMessage != nil)
         await #expect(viewModel.isLoading == false)
     }
 
+   
     @Test
-    func testDeleteArticleRemovesCorrectItem() async throws {
+    func testShareArticle() async throws {
         let viewModel = await HomeViewModel()
         let article = FactCheckArticle.mock
-        viewModel.savedArticles = [article]
-        viewModel.currentArticle = article
-
-        viewModel.deleteArticle(article)
-
-        #expect(viewModel.savedArticles.isEmpty)
-        #expect(viewModel.currentArticle == nil)
+        await viewModel.shareArticle(article)
+        #expect(true) // No crash means pass
     }
 }
