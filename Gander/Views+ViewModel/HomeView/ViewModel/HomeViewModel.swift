@@ -29,7 +29,7 @@ class HomeViewModel: ObservableObject {
     @Published var selectedTab = 0
 
     // MARK: - Stored Articles
-    @CodableAppStorage(CacheKeys.articleHisotry) var savedArticles: [FactCheckArticle] = [] {
+    @CodableAppStorage(CacheKeys.articleHistory) var savedArticles: [FactCheckArticle] = [] {
         didSet {
             updateFilteredArticles()
         }
@@ -43,8 +43,8 @@ class HomeViewModel: ObservableObject {
     // MARK: - Article Filtering
     func updateFilteredArticles() {
         filteredArticles = selectedLabel == "All"
-            ? savedArticles
-            : savedArticles.filter { $0.status == selectedLabel }
+            ? savedArticles.sorted { $0.dateSaved > $1.dateSaved }
+            : savedArticles.filter { $0.status == selectedLabel }.sorted { $0.dateSaved > $1.dateSaved }
     }
 
     func deleteArticle(_ article: FactCheckArticle) {
