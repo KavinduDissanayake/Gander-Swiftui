@@ -13,14 +13,43 @@
 		CFB391E62E04FFF9004165D4 /* MijickPopups in Frameworks */ = {isa = PBXBuildFile; productRef = CFB391E52E04FFF9004165D4 /* MijickPopups */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CFB3A9182E050A65004165D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFB391192E048EEC004165D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFB391202E048EEC004165D4;
+			remoteInfo = Gender;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		CFB391212E048EEC004165D4 /* Gender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gender.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFB3A9142E050A64004165D4 /* GenderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CFB3A91E2E050AFA004165D4 /* Exceptions for "Gender" folder in "GenderTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Views+ViewModel/HomeView/ViewModel/HomeViewModel.swift",
+			);
+			target = CFB3A9132E050A64004165D4 /* GenderTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CFB391232E048EEC004165D4 /* Gender */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CFB3A91E2E050AFA004165D4 /* Exceptions for "Gender" folder in "GenderTests" target */,
+			);
 			path = Gender;
+			sourceTree = "<group>";
+		};
+		CFB3A9152E050A64004165D4 /* GenderTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GenderTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -37,6 +66,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CFB3A9112E050A64004165D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -44,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				CFB391232E048EEC004165D4 /* Gender */,
+				CFB3A9152E050A64004165D4 /* GenderTests */,
 				CFB391222E048EEC004165D4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				CFB391212E048EEC004165D4 /* Gender.app */,
+				CFB3A9142E050A64004165D4 /* GenderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,6 +123,29 @@
 			productReference = CFB391212E048EEC004165D4 /* Gender.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CFB3A9132E050A64004165D4 /* GenderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFB3A91A2E050A65004165D4 /* Build configuration list for PBXNativeTarget "GenderTests" */;
+			buildPhases = (
+				CFB3A9102E050A64004165D4 /* Sources */,
+				CFB3A9112E050A64004165D4 /* Frameworks */,
+				CFB3A9122E050A64004165D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFB3A9192E050A65004165D4 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CFB3A9152E050A64004165D4 /* GenderTests */,
+			);
+			name = GenderTests;
+			packageProductDependencies = (
+			);
+			productName = GenderTests;
+			productReference = CFB3A9142E050A64004165D4 /* GenderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -97,6 +158,10 @@
 				TargetAttributes = {
 					CFB391202E048EEC004165D4 = {
 						CreatedOnToolsVersion = 16.2;
+					};
+					CFB3A9132E050A64004165D4 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = CFB391202E048EEC004165D4;
 					};
 				};
 			};
@@ -121,12 +186,20 @@
 			projectRoot = "";
 			targets = (
 				CFB391202E048EEC004165D4 /* Gender */,
+				CFB3A9132E050A64004165D4 /* GenderTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		CFB3911F2E048EEC004165D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFB3A9122E050A64004165D4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -143,7 +216,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CFB3A9102E050A64004165D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CFB3A9192E050A65004165D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFB391202E048EEC004165D4 /* Gender */;
+			targetProxy = CFB3A9182E050A65004165D4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CFB3912E2E048EED004165D4 /* Debug */ = {
@@ -338,6 +426,47 @@
 			};
 			name = Release;
 		};
+		CFB3A91B2E050A65004165D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NPXX324A2L;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kdmobileapps.GenderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gender.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gender";
+			};
+			name = Debug;
+		};
+		CFB3A91C2E050A65004165D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NPXX324A2L;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kdmobileapps.GenderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gender.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gender";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -355,6 +484,15 @@
 			buildConfigurations = (
 				CFB391312E048EED004165D4 /* Debug */,
 				CFB391322E048EED004165D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFB3A91A2E050A65004165D4 /* Build configuration list for PBXNativeTarget "GenderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFB3A91B2E050A65004165D4 /* Debug */,
+				CFB3A91C2E050A65004165D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
