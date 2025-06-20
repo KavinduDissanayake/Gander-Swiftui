@@ -35,17 +35,12 @@ struct HomeView: View {
             Button(action: {
                 viewModel.showChoseBootmSheet()
             }) {
-                Image(systemName: "eye")
+                Image(.icFloat)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(.black)
-                    .padding(20)
-                    .background(Color.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .frame(width: 60, height: 60)
+                    .padding()
             }
-            .frame(width: 60, height: 60)
-            .padding()
             .vAlign(.bottom)
             
         }

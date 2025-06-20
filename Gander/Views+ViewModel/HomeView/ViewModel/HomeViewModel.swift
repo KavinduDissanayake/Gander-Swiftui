@@ -69,8 +69,12 @@ class HomeViewModel: ObservableObject {
         Task {
             do {
                 let article = try await scrapeArticle(from: url, urlString: urlString)
+                if let existingIndex = savedArticles.firstIndex(where: { $0.url == urlString }) {
+                    savedArticles[existingIndex] = article
+                } else {
+                    savedArticles.insert(article, at: 0)
+                }
                 self.currentArticle = article
-                self.savedArticles.insert(article, at: 0)
                 await submitFactCheck(for: article)
                 updateFilteredArticles()
             } catch {

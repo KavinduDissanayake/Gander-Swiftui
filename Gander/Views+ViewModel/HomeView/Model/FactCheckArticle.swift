@@ -58,9 +58,9 @@ enum FactCheckStatus: String, CaseIterable {
 
     var color: Color {
         switch self {
-        case .verified: return .green
-        case .unverified: return .red
-        case .misinterpretation: return .orange
+        case .verified: return .emeraldGreen
+        case .unverified: return .carmineRed
+        case .misinterpretation: return .sunsetOrange
         case .reviewing: return .blue
         case .unknown: return .gray
         }

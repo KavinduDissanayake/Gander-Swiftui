@@ -17,6 +17,7 @@ struct FactCardView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            
             // Image Section
             RemoteImageView(imageURL: article.imageURL, cornerRadius: 0)
                 .aspectRatio(contentMode: .fill)

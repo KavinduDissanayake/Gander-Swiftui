@@ -11,7 +11,7 @@ struct CustomTabBar: View {
     @Binding var selectedTab: Int
     let items: [TabItem]
     // Customizable properties
-    var tabBarHeight: CGFloat = 56
+    var tabBarHeight: CGFloat = 50
     var backgroundColor: Color = Color(.systemBackground)
     var selectedColor: Color = .tint
     var unselectedColor: Color = Color(.systemGray)
