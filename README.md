@@ -1,5 +1,9 @@
 # 📰 Gander - Fact-Check News with SwiftUI
 
+📽️ [Watch Demo Video](https://drive.google.com/file/d/1ceWR2IwA8giTdS9KSyBJ7iF0jQOx1-Mf/view?usp=sharing)
+
+
+
 **Gander** is a SwiftUI-powered mobile application that allows users to verify New York Times articles using AI-powered fact-checking. Designed with clean architecture, a modular structure, and testability in mind, the app is focused on simplicity, usability, and accuracy.
 
 ---
