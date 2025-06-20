@@ -14,15 +14,38 @@ class HomeViewModel: ObservableObject {
     @Published var currentArticle: FactCheckArticle? = nil
     @Published var isLoading: Bool = false
     
-    @CodableAppStorage(CacheKeys.articleHisotry) var savedArticles: [FactCheckArticle] = []
+    @Published var isNavigateToDetails: Bool = false
+    
+    @CodableAppStorage(CacheKeys.articleHisotry) var savedArticles: [FactCheckArticle] = [] {
+        didSet {
+            updateFilteredArticles()
+        }
+    }
+    @Published var filteredArticles: [FactCheckArticle] = []
+    @Published var selectedLabel: String = "All" {
+        didSet {
+            updateFilteredArticles()
+        }
+    }
 
     @Published var inputURL: String = ""
     @Published var isBottomSheetVisible: Bool = false
-    @Published var selectedLabel: String = "All"
+  
     @Published var errorMessage: String?
     @Published var selectedTab = 0
 
 
+     func updateFilteredArticles() {
+        if selectedLabel == "All" {
+            filteredArticles = savedArticles
+        } else {
+            filteredArticles = savedArticles.filter { $0.status == selectedLabel }
+        }
+    }
+
+    init(){
+        self.updateFilteredArticles()
+    }
 
     func loadArticle(from urlString: String) {
         guard let url = URL(string: urlString) else {
@@ -41,6 +64,7 @@ class HomeViewModel: ObservableObject {
                 
                 // Start fact-checking
                 await submitFactCheck(for: article)
+                updateFilteredArticles()
             } catch {
                 handleError(error)
             }
@@ -165,6 +189,7 @@ class HomeViewModel: ObservableObject {
             if currentArticle?.id == articleId {
                 currentArticle = savedArticles[index]
             }
+            updateFilteredArticles()
         }
     }
     
@@ -183,6 +208,7 @@ class HomeViewModel: ObservableObject {
         if currentArticle?.id == article.id {
             currentArticle = nil
         }
+        updateFilteredArticles()
     }
 
     // Share Article Method
@@ -194,4 +220,26 @@ class HomeViewModel: ObservableObject {
             window.rootViewController?.present(activityVC, animated: true)
         }
     }
+    
+    // Present Bottom Sheet Method
+    func presentInputBottomSheet() {
+        Task {
+            await FactCheckInputBottomSheet(
+                inputURL: Binding(get: { self.inputURL }, set: { self.inputURL = $0 }),
+                viewModel: self
+            ).present()
+        }
+    }
+    
+    
+    func showChoseBootmSheet(){
+        Task {
+            await AddOptionsBottomSheet(onSelectImage: {}, onSelectLink: {
+                self.presentInputBottomSheet()
+            }).present()
+            
+        }
+    }
 }
+
+  

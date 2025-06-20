@@ -46,6 +46,7 @@ struct BottomTabView: View {
         }
         .background(Color(.systemGray6))
         .ignoresSafeArea(.keyboard)
+        .tint(.tint)
     }
 }
 

@@ -13,6 +13,7 @@ struct GenderApp: App {
         WindowGroup {
             RootView()
                 .applyViewRoutes()
+                .applyMijickPopups()
         }
     }
 }

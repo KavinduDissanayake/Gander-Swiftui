@@ -15,9 +15,8 @@ struct CustomTabBar: View {
     // Customizable properties
     var tabBarHeight: CGFloat = 56
     var backgroundColor: Color = Color(.systemBackground)
-    var selectedColor: Color = .blue
+    var selectedColor: Color = .tint
     var unselectedColor: Color = Color(.systemGray)
-    var floatingButtonColor: Color = .blue
     var shadowColor: Color = Color.black.opacity(0.1)
     
     var body: some View {

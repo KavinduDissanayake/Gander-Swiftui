@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CFB3919B2E04985D004165D4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CFB3919A2E04985D004165D4 /* Alamofire */; };
 		CFB391B02E04A055004165D4 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = CFB391AF2E04A055004165D4 /* SwiftSoup */; };
+		CFB391C32E04B926004165D4 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = CFB391C22E04B926004165D4 /* WaterfallGrid */; };
+		CFB391E62E04FFF9004165D4 /* MijickPopups in Frameworks */ = {isa = PBXBuildFile; productRef = CFB391E52E04FFF9004165D4 /* MijickPopups */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +30,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFB391C32E04B926004165D4 /* WaterfallGrid in Frameworks */,
 				CFB3919B2E04985D004165D4 /* Alamofire in Frameworks */,
+				CFB391E62E04FFF9004165D4 /* MijickPopups in Frameworks */,
 				CFB391B02E04A055004165D4 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +78,8 @@
 			packageProductDependencies = (
 				CFB3919A2E04985D004165D4 /* Alamofire */,
 				CFB391AF2E04A055004165D4 /* SwiftSoup */,
+				CFB391C22E04B926004165D4 /* WaterfallGrid */,
+				CFB391E52E04FFF9004165D4 /* MijickPopups */,
 			);
 			productName = Gender;
 			productReference = CFB391212E048EEC004165D4 /* Gender.app */;
@@ -106,6 +112,8 @@
 			packageReferences = (
 				CFB391992E04985D004165D4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CFB391AE2E04A055004165D4 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				CFB391C12E04B926004165D4 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
+				CFB391E42E04FFF9004165D4 /* XCRemoteSwiftPackageReference "Popups" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CFB391222E048EEC004165D4 /* Products */;
@@ -370,6 +378,22 @@
 				minimumVersion = 2.8.8;
 			};
 		};
+		CFB391C12E04B926004165D4 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+		CFB391E42E04FFF9004165D4 /* XCRemoteSwiftPackageReference "Popups" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mijick/Popups";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -382,6 +406,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CFB391AE2E04A055004165D4 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		CFB391C22E04B926004165D4 /* WaterfallGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFB391C12E04B926004165D4 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
+			productName = WaterfallGrid;
+		};
+		CFB391E52E04FFF9004165D4 /* MijickPopups */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFB391E42E04FFF9004165D4 /* XCRemoteSwiftPackageReference "Popups" */;
+			productName = MijickPopups;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
