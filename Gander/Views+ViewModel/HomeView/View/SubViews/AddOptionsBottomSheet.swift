@@ -8,39 +8,6 @@
 import SwiftUI
 import MijickPopups
 
-struct AddOptionRow: View {
-    let icon: String
-    let title: String
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            HStack {
-                Image(systemName: icon)
-                    .fontRegular(20)
-                    .foregroundColor(.tint)
-                    .padding(8)
-                    .background(Color.gray.opacity(0.2))
-                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-
-                Text(title)
-                    .fontRegular(17)
-                    .foregroundColor(.tint)
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.tint)
-
-            }
-            .padding()
-            .background(Color(uiColor: .systemGray6))
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-            .padding(.horizontal, 8)
-        }
-    }
-}
-
 struct AddOptionsBottomSheet: BottomPopup {
     let onSelectImage: () -> Void
     let onSelectLink: () -> Void
@@ -65,8 +32,8 @@ struct AddOptionsBottomSheet: BottomPopup {
                 .foregroundColor(.primary)
 
             VStack(spacing: 12) {
-                AddOptionRow(icon: "photo.on.rectangle", title: "Image", action: onSelectImage)
-                AddOptionRow(icon: "link", title: "Link", action: onSelectLink)
+                AddOptionRow(icon: "ic_gallary", title: "Image", action: onSelectImage)
+                AddOptionRow(icon: "ic_link", title: "Link", action: onSelectLink)
             }
             .padding(.horizontal)
             .padding(.bottom)
@@ -75,12 +42,62 @@ struct AddOptionsBottomSheet: BottomPopup {
     }
 }
 
+struct AddOptionRow: View {
+    let icon: String
+    let title: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack {
+                Image(icon)
+                    .renderingMode(.template)
+                    .fontRegular(20)
+                    .foregroundColor(.tint)
+                    .padding(8)
+                    .background(Color.gray.opacity(0.2))
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+
+                Text(title)
+                    .fontRegular(17)
+                    .foregroundColor(.tint)
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.tint)
+
+            }
+            .padding()
+            .background(Color(.elevatedSurfaceBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .padding(.horizontal, 8)
+        }
+    }
+}
+
 #if DEBUG
-#Preview {
+#Preview("AddOptionsBottomSheet - Light") {
     AddOptionsBottomSheet(
         onSelectImage: { print("Image selected") },
         onSelectLink: { print("Link selected") }
     )
+}
 
+#Preview("AddOptionsBottomSheet - Dark") {
+    AddOptionsBottomSheet(
+        onSelectImage: { print("Image selected") },
+        onSelectLink: { print("Link selected") }
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("AddOptionRow") {
+    VStack(spacing: 16) {
+        AddOptionRow(icon: "photo.on.rectangle", title: "Image", action: {})
+        AddOptionRow(icon: "link", title: "Link", action: {})
+    }
+    .padding()
+    .background(Color(.systemBackground))
 }
 #endif

@@ -10,6 +10,8 @@ import SwiftUI
 struct SourcesView: View {
     let sources: [FactSource]
     private let maxDisplay = 3
+    @State private var selectedURL: URL?
+    @State private var isActive = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -17,7 +19,15 @@ struct SourcesView: View {
                 .fontSemiBold(17)
 
             ForEach(sources.prefix(maxDisplay), id: \.url) { source in
-                SourceRowView(source: source)
+                Button {
+                    if let urlString = source.url, let url = URL(string: urlString) {
+                        selectedURL = url
+                        isActive = true
+                    }
+                } label: {
+                    SourceRowView(source: source)
+                        .contentShape(Rectangle())
+                }
             }
 
             if sources.count > maxDisplay {
@@ -29,7 +39,16 @@ struct SourcesView: View {
 
                     let otherSources = sources.suffix(from: maxDisplay).prefix(3)
                     ForEach(Array(otherSources.enumerated()), id: \.offset) { index, source in
-                        SourceIconBadge(imageURL: source.sourceImageURL ?? "", index: index)
+
+                        Button {
+                            if let urlString = source.url, let url = URL(string: urlString) {
+                                selectedURL = url
+                                isActive = true
+                            }
+                        } label: {
+                            SourceIconBadge(imageURL: source.sourceImageURL ?? "", index: index)
+                                .contentShape(Rectangle())
+                        }
                     }
 
 //                    if sources.count > maxDisplay + 3 {
@@ -46,6 +65,10 @@ struct SourcesView: View {
                 .padding(.top, 8)
             }
         }
+        .navigate(
+            to: InAppWebView(url: selectedURL),
+            when: $isActive
+        )
     }
 }
 

@@ -14,6 +14,7 @@ import SwiftUI
                 .fontRegular(14)
                 .padding()
                 .foregroundStyle(.black)
+                .hCenter()
                 .background(Color(.containerBackground))
                 .cornerRadius(12)
         }
