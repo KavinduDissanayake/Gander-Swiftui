@@ -5,7 +5,6 @@
 //  Created by Kavindu Dissanayake on 2025-06-20.
 //
 
-
 import SwiftUI
 
 struct SourceRowView: View {
@@ -18,11 +17,10 @@ struct SourceRowView: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(source.title ?? "Unknown Title")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
+                    .fontSemiBold(15)
 
                 Text(source.date ?? "")
-                    .font(.caption)
+                    .fontRegular(12)
                     .foregroundColor(.gray)
             }
 
@@ -32,4 +30,9 @@ struct SourceRowView: View {
                 .frame(width: 32, height: 32)
         }
     }
+
+}
+
+#Preview {
+    SourceRowView(source: .mock)
 }

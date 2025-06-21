@@ -13,8 +13,6 @@ struct FactCheckInputBottomSheet: BottomPopup {
     @Binding var inputURL: String
     @ObservedObject var viewModel: HomeViewModel
 
-    
-    
     func configurePopup(config: BottomPopupConfig) -> BottomPopupConfig {
         config
             .heightMode(.auto)
@@ -23,19 +21,17 @@ struct FactCheckInputBottomSheet: BottomPopup {
             .cornerRadius(16)
     }
 
-    
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Spacer()
                 Button(action: {
-                    Task{
+                    Task {
                         await dismissLastPopup()
                     }
                 }) {
                     Image(systemName: "xmark")
-                        .font(.system(size: 16, weight: .semibold))
+                        .fontSemiBold(16)
                         .foregroundColor(.secondary)
                         .padding(8)
                         .background(Color(.systemGray5))
@@ -46,7 +42,7 @@ struct FactCheckInputBottomSheet: BottomPopup {
             .padding(.horizontal)
 
             Text("Enter NYTimes Article URL")
-                .font(.headline)
+                .fontSemiBold(17)
                 .padding(.horizontal)
 
             VStack(spacing: 8) {
@@ -90,14 +86,14 @@ struct FactCheckInputBottomSheet: BottomPopup {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundColor(.orange)
                     Text(errorMessage)
-                        .font(.caption)
+                        .fontRegular(12)
                         .foregroundColor(.red)
                         .multilineTextAlignment(.leading)
                     Spacer()
                     Button("Dismiss") {
                         viewModel.clearError()
                     }
-                    .font(.caption)
+                    .fontRegular(12)
                     .foregroundColor(.blue)
                 }
                 .padding()
@@ -110,7 +106,7 @@ struct FactCheckInputBottomSheet: BottomPopup {
                 VStack(spacing: 8) {
                     ProgressView()
                     Text("Analyzing article...")
-                        .font(.caption)
+                        .fontRegular(12)
                         .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity)
@@ -121,4 +117,9 @@ struct FactCheckInputBottomSheet: BottomPopup {
     }
 }
 
+#Preview {
+    @State var inputURL = ""
+    let viewModel = HomeViewModel()
 
+    return FactCheckInputBottomSheet(inputURL: $inputURL, viewModel: viewModel)
+}

@@ -16,7 +16,7 @@ struct EmptyStatePlaceholder: View {
                 .frame(width: 80, height: 80)
                 .foregroundColor(.gray)
             Text("No articles fact-checked yet.")
-                .font(.subheadline)
+                .fontRegular(15)
                 .foregroundColor(.secondary)
         }
         .padding()

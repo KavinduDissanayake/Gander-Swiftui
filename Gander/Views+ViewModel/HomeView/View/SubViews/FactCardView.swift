@@ -10,14 +10,14 @@ import SwiftUI
 // MARK: - Enhanced Components
 struct FactCardView: View {
     let article: FactCheckArticle
-    var onShare: (() -> Void)? = nil
-    var onRefresh: (() -> Void)? = nil
-    var onDelete: (() -> Void)? = nil
-    var onTap: (() -> Void)? = nil
+    var onShare: (() -> Void)?
+    var onRefresh: (() -> Void)?
+    var onDelete: (() -> Void)?
+    var onTap: (() -> Void)?
 
     var body: some View {
         VStack(spacing: 0) {
-            
+
             // Image Section
             RemoteImageView(imageURL: article.imageURL, cornerRadius: 0)
                 .aspectRatio(contentMode: .fill)
@@ -27,24 +27,22 @@ struct FactCardView: View {
             // Content Section
             VStack(alignment: .leading, spacing: 6) {
                 Text(article.headline)
-                    .font(.headline)
+                    .fontSemiBold(17)
                     .foregroundColor(.primary)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.bottom, 2)
 
                 Text(article.dateSaved.formatted(date: .abbreviated, time: .shortened))
-                    .font(.caption)
+                    .fontRegular(12)
                     .foregroundColor(.secondary)
             }
             .padding(.horizontal)
             .padding(.top, 8)
-            .frame(maxWidth: .infinity, alignment: .leading)
 
             // Status Section
             HStack {
                 Text(article.factCheckStatus.displayName)
-                    .font(.caption)
-                    .bold()
+                    .fontSemiBold(12)
                     .foregroundColor(.white)
 
                 Spacer()
@@ -57,9 +55,8 @@ struct FactCardView: View {
             .background(article.factCheckStatus.color)
         }
         .frame(minWidth: 170)
-        .background(Color(.systemBackground))
+        .background(.lightBackgroundGray)
         .cornerRadius(16)
-        .shadow(radius: 4)
         .contextMenu {
             Button {
                 onShare?()
@@ -83,18 +80,16 @@ struct FactCardView: View {
             onTap?()
         }
     }
+
 }
-
-
 
 #Preview("FactCardView Variants") {
     ScrollView {
-        WaterfallGrid(FactCheckStatus.allCases, id: \.self) { status in
+        WaterfallGrid(FactCheckStatus.allCases, id: \.self) { _ in
             FactCardView(article: FactCheckArticle.mock)
                 .frame(width: 180)
                 .background(Color.white)
                 .cornerRadius(12)
-                .shadow(radius: 2)
         }
         .gridStyle(
             columnsInPortrait: 2,
@@ -105,4 +100,3 @@ struct FactCardView: View {
         .padding()
     }
 }
-

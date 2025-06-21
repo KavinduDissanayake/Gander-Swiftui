@@ -1,0 +1,11 @@
+//
+//  AppConfig.xcconfig
+//  Gander
+//
+//  Created by KavinduDissanayake on 2025-06-21.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+ANTHROPIC_API_KEY=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

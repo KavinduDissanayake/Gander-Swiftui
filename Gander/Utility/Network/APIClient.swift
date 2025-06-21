@@ -8,37 +8,6 @@
 import Foundation
 import Alamofire
 
-// MARK: - Custom API Errors
-enum APIClientError: Error {
-    case noInternetConnection
-    case requestFailed
-    case decodingFailed
-    case serverError(decodedError: ErrorResponse)
-    case responseUnsuccessful
-    case timeoutException
-    case unknownHostException
-    case unknownException
-    case apiException
-    case forbidden
-    case scrapingFailed
-    case invalidURL
-}
-
-// MARK: - Optional String Error (For Convenience)
-struct StringError: Error {
-    var message: String?
-    
-    init(_ message: String?) {
-        self.message = message
-    }
-}
-
-// MARK: - Error Response Structure
-struct ErrorResponse: Codable, Error {
-    let code: Int?
-    let message: String?
-}
-
 // MARK: - API Client
 class APIClient {
     static let shared = APIClient()

@@ -8,7 +8,6 @@
 import SwiftUI
 import MijickPopups
 
-
 struct AddOptionRow: View {
     let icon: String
     let title: String
@@ -18,21 +17,21 @@ struct AddOptionRow: View {
         Button(action: action) {
             HStack {
                 Image(systemName: icon)
-                    .font(.title2)
+                    .fontRegular(20)
                     .foregroundColor(.tint)
                     .padding(8)
                     .background(Color.gray.opacity(0.2))
                     .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
 
                 Text(title)
-                    .font(.body)
+                    .fontRegular(17)
                     .foregroundColor(.tint)
 
                 Spacer()
 
                 Image(systemName: "chevron.right")
                     .foregroundColor(.tint)
-                   
+
             }
             .padding()
             .background(Color(uiColor: .systemGray6))
@@ -48,6 +47,7 @@ struct AddOptionsBottomSheet: BottomPopup {
 
     func configurePopup(config: BottomPopupConfig) -> BottomPopupConfig {
         config
+
             .heightMode(.auto)
             .backgroundColor(Color(uiColor: .secondarySystemBackground))
             .overlayColor(Color.black.opacity(0.3))

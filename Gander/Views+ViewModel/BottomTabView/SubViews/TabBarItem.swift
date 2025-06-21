@@ -13,16 +13,17 @@ struct TabBarItem: View {
     let selectedColor: Color
     let unselectedColor: Color
     let action: () -> Void
-    
+
     var body: some View {
         Button(action: action) {
             VStack(spacing: 4) {
-                Image(systemName: isSelected ? (item.selectedIcon ?? item.icon) : item.icon)
-                    .font(.system(size: 20, weight: isSelected ? .semibold : .regular))
+                Image(isSelected ? (item.selectedIcon ?? item.icon) : item.icon)
+                    .renderingMode(.template)
+                    .fontRegular(16)
                     .foregroundColor(isSelected ? selectedColor : unselectedColor)
-                
+
                 Text(item.title)
-                    .font(.system(size: 12, weight: isSelected ? .semibold : .regular))
+                    .font(isSelected ? .semiBoldFont(withSize: 12) : .regularFont(withSize: 12))
                     .foregroundColor(isSelected ? selectedColor : unselectedColor)
             }
             .scaleEffect(isSelected ? 1.1 : 1.0)

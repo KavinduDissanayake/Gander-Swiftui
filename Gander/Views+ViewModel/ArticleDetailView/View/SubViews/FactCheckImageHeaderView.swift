@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
- struct FactCheckImageHeaderView: View {
+struct FactCheckImageHeaderView: View {
     let imageUrl: String?
     let headline: String
     let date: Date
@@ -14,31 +14,40 @@ import SwiftUI
 
     var body: some View {
         VStack(spacing: 0) {
-            RemoteImageView(imageURL: imageUrl)
-                .frame(height: 200)
-                .clipped()
+            ZStack {
+                RemoteImageView(imageURL: imageUrl,
+                                cornerRadius: 12,
+                                roundedCorners: [.topLeft, .topRight]
 
-            VStack(alignment: .leading, spacing: 8) {
+                )
+
+                LinearGradient(
+                    gradient: Gradient(colors: [.black, .black.opacity(0)]),
+                    startPoint: .bottom, endPoint: .top
+                )
+                .frame(height: 160)
+                .vAlign(.bottom)
+
                 Text(headline)
                     .font(.headline)
                     .lineLimit(3)
                     .multilineTextAlignment(.leading)
-
-                Text(date.formatted(date: .abbreviated, time: .shortened))
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.white)
+                    .vAlign(.bottom)
+                    .padding()
             }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 240)
 
             HStack {
                 Text(status.displayName)
-                    .font(.caption)
+                    .fontRegular(12)
+                    .foregroundStyle(.white)
                     .bold()
 
                 Spacer()
 
                 Image(systemName: status.iconName)
+                    .foregroundStyle(.white)
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)

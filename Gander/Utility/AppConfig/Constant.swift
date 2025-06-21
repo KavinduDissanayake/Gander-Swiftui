@@ -5,36 +5,32 @@
 //  Created by KavinduDissanayake on 2025-06-20.
 //
 
-struct Constant {
-    enum Environment {
-        case staging
-        case qa
-        case dev
-        case prod
-    }
+import Foundation
 
-    static let environment: Environment = .dev
+enum AppEnvironment {
+    case staging
+    case development
+    case production
+}
+
+struct Constant {
+
+    static let environment: AppEnvironment = .development
 
     static func isLoggingEnabled() -> Bool {
         switch environment {
-        case .staging, .qa, .dev:
+        case .staging, .development:
             return true
-        case .prod:
+        case .production:
             return false
         }
     }
-    
+
     static var anthropicAPIKey: String {
-        switch environment {
-        case .staging:
-            return "sk-staging-key"
-        case .qa:
-            return "sk-qa-key"
-        case .dev:
-            return "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"
-        case .prod:
-            return "sk-prod-key"
+        guard let key = Bundle.main.infoDictionary?["ANTHROPIC_API_KEY"] as? String else {
+            fatalError("ANTHROPIC_API_KEY not found in Info.plist")
         }
+        return key
     }
 
     static let factCheckPromptTemplate = """
@@ -51,7 +47,7 @@ struct Constant {
     Then provide:
     1. A short rationale for your classification (2–3 sentences).
     2. List any specific factual claims that were verified or disputed.
-    3. Provide a list of sources used, including display metadata.
+    3. Provide a list of at least 4 credible sources used, including display metadata.
 
     Respond strictly in the following JSON format:
 

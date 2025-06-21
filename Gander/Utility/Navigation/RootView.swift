@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-/// MARK: - Root View
+// MARK: - Root View
 struct RootView: View {
     @EnvironmentObject var router: ViewRouter
-    
+
     var body: some View {
         // Since the target audience is iOS 15, we use NavigationView instead of NavigationStack
         NavigationView {
@@ -18,7 +18,7 @@ struct RootView: View {
         } //: NavigationView
         .navigationViewStyle(.stack)
     }
-    
+
     @ViewBuilder
     func containedView(roots: Roots) -> some View {
         switch router.currentRoot {
@@ -29,7 +29,6 @@ struct RootView: View {
         }
     }
 }
-
 
 struct RouteModifier: ViewModifier {
     func body(content: Content) -> some View {
@@ -43,7 +42,6 @@ extension View {
         modifier(RouteModifier())
     }
 }
-
 
 #Preview {
     RootView()

@@ -10,9 +10,10 @@ struct RemoteImageView: View {
     let imageURL: String?
     var placeholderSystemImage: String = "newspaper"
     var failureSystemImage: String = "photo"
-    var width: CGFloat? = nil
-    var height: CGFloat? = nil
+    var width: CGFloat?
+    var height: CGFloat?
     var cornerRadius: CGFloat = 0
+    var roundedCorners: UIRectCorner = [.allCorners]
 
     var body: some View {
         Group {
@@ -23,13 +24,12 @@ struct RemoteImageView: View {
                         Rectangle()
                             .fill(Color.gray.opacity(0.3))
                             .overlay(ProgressView())
-                            .cornerRadius(cornerRadius)
+                            .clipShape(RoundedCorner(radius: cornerRadius, corners: roundedCorners))
                     case .success(let image):
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .clipped()
-                            .cornerRadius(cornerRadius)
+                            .clipShape(RoundedCorner(radius: cornerRadius, corners: roundedCorners))
                     case .failure:
                         Rectangle()
                             .fill(Color.gray.opacity(0.3))
@@ -38,7 +38,7 @@ struct RemoteImageView: View {
                                     .font(.largeTitle)
                                     .foregroundColor(.gray)
                             )
-                            .cornerRadius(cornerRadius)
+                            .clipShape(RoundedCorner(radius: cornerRadius, corners: roundedCorners))
                     @unknown default:
                         EmptyView()
                     }
@@ -51,7 +51,7 @@ struct RemoteImageView: View {
                             .font(.largeTitle)
                             .foregroundColor(.gray)
                     )
-                    .cornerRadius(cornerRadius)
+                    .clipShape(RoundedCorner(radius: cornerRadius, corners: roundedCorners))
             }
         }
         .frame(width: width, height: height)
@@ -62,9 +62,9 @@ struct RemoteImageView: View {
 #Preview {
     VStack(spacing: 20) {
         RemoteImageView(imageURL: "https://via.placeholder.com/150", width: 150, height: 150, cornerRadius: 12)
-        
+
         RemoteImageView(imageURL: nil, width: 150, height: 150, cornerRadius: 12)
-        
+
         RemoteImageView(imageURL: "invalid_url", width: 150, height: 150, cornerRadius: 12)
     }
     .padding()

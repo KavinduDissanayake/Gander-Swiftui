@@ -5,10 +5,8 @@
 //  Created by KavinduDissanayake on 2025-06-20.
 //
 
-
 import SwiftUI
 import SwiftSoup
-
 
 struct ArticleDetailView: View {
     @Environment(\.dismiss) private var dismiss
@@ -16,7 +14,7 @@ struct ArticleDetailView: View {
 
     var body: some View {
         if let article = article {
-            ScrollView {
+          ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 20) {
                     FactCheckImageHeaderView(
                         imageUrl: article.imageURL,
@@ -30,11 +28,12 @@ struct ArticleDetailView: View {
                     }
 
                     FactCheckArticlePreviewView(bodyText: article.bodyText)
-                    
-                    
+
                     if let sources = article.sources {
                         SourcesView(sources: sources)
                     }
+
+                    Spacer()
 
                     Button(action: {
                         shareResults(article)
@@ -45,13 +44,13 @@ struct ArticleDetailView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(Color.neutralBackground)
                         .foregroundColor(.white)
                         .cornerRadius(12)
                     }
                 }
-                .padding()
             }
+            .padding(.horizontal, 20)
             .navigationBarBackButtonHidden()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -59,6 +58,7 @@ struct ArticleDetailView: View {
                         dismiss()
                     }) {
                         Label("Back", systemImage: "chevron.left")
+                            .fontSemiBold(17)
                     }
                 }
             }

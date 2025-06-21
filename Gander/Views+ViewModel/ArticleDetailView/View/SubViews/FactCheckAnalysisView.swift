@@ -11,9 +11,10 @@ import SwiftUI
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(rationale)
-                .font(.body)
+                .fontRegular(14)
                 .padding()
-                .background(Color(.systemGray6))
+                .foregroundStyle(.black)
+                .background(Color(.containerBackground))
                 .cornerRadius(12)
         }
     }

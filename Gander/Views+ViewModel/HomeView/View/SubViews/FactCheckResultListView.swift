@@ -7,12 +7,10 @@
 
 import SwiftUI
 import WaterfallGrid
-// MARK: - Main App with Tab Navigation
 
 struct FactCheckResultListView: View {
     @Binding var articles: [FactCheckArticle]
     @ObservedObject var viewModel: HomeViewModel
-
 
     var body: some View {
         ScrollView(showsIndicators: true) {
@@ -33,7 +31,7 @@ struct FactCheckResultListView: View {
                         viewModel.isNavigateToDetails.toggle()
                     }
                 )
-            
+
             }
             .gridStyle(
                 columnsInPortrait: 2,
@@ -43,7 +41,20 @@ struct FactCheckResultListView: View {
             )
             .padding()
         }
+        .refreshable {
+            viewModel.refreshArticles()
+        }
         .navigate(to: ArticleDetailView(article: viewModel.currentArticle), when: $viewModel.isNavigateToDetails)
     }
 }
 
+#Preview {
+    FactCheckResultListView(
+        articles: .constant([
+            FactCheckArticle.mock,
+            FactCheckArticle.mock,
+            FactCheckArticle.mock
+        ]),
+        viewModel: HomeViewModel()
+    )
+}

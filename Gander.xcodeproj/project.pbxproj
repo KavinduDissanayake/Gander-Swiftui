@@ -11,6 +11,8 @@
 		CFB391B02E04A055004165D4 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = CFB391AF2E04A055004165D4 /* SwiftSoup */; };
 		CFB391C32E04B926004165D4 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = CFB391C22E04B926004165D4 /* WaterfallGrid */; };
 		CFB391E62E04FFF9004165D4 /* MijickPopups in Frameworks */ = {isa = PBXBuildFile; productRef = CFB391E52E04FFF9004165D4 /* MijickPopups */; };
+		CFCAF8DA2E07296700B0BED4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CFCAF8D92E07296700B0BED4 /* .swiftlint.yml */; };
+		CFCAF8DB2E07296700B0BED4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CFCAF8D92E07296700B0BED4 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,15 +28,27 @@
 /* Begin PBXFileReference section */
 		CFB391212E048EEC004165D4 /* Gander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFB3A9142E050A64004165D4 /* GanderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GanderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFCAE0E22E07219D00B0BED4 /* AppConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppConfig.xcconfig; sourceTree = "<group>"; };
+		CFCAF8D92E07296700B0BED4 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		CFA531E72E051709005CA863 /* Exceptions for "Gander" folder in "GanderTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				CommonViews/ExpandableText.swift,
+				SupportFiles/Info.plist,
 				"Utility/Extensions/Optional++.swift",
+				"Views+ViewModel/ArticleDetailView/View/ArticleDetailView.swift",
 			);
 			target = CFB3A9132E050A64004165D4 /* GanderTests */;
+		};
+		CFCAE0E62E0721D300B0BED4 /* Exceptions for "Gander" folder in "Gander" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SupportFiles/Info.plist,
+			);
+			target = CFB391202E048EEC004165D4 /* Gander */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -42,6 +56,7 @@
 		CFB391232E048EEC004165D4 /* Gander */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				CFCAE0E62E0721D300B0BED4 /* Exceptions for "Gander" folder in "Gander" target */,
 				CFA531E72E051709005CA863 /* Exceptions for "Gander" folder in "GanderTests" target */,
 			);
 			path = Gander;
@@ -79,9 +94,11 @@
 		CFB391182E048EEC004165D4 = {
 			isa = PBXGroup;
 			children = (
+				CFCAF8D92E07296700B0BED4 /* .swiftlint.yml */,
 				CFB391232E048EEC004165D4 /* Gander */,
 				CFB3A9152E050A64004165D4 /* GenderTests */,
 				CFB391222E048EEC004165D4 /* Products */,
+				CFCAE0EA2E07227A00B0BED4 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +111,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CFCAE0EA2E07227A00B0BED4 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				CFCAE0E22E07219D00B0BED4 /* AppConfig.xcconfig */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,6 +129,7 @@
 				CFB3911D2E048EEC004165D4 /* Sources */,
 				CFB3911E2E048EEC004165D4 /* Frameworks */,
 				CFB3911F2E048EEC004165D4 /* Resources */,
+				CFCAF8D22E07287200B0BED4 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -197,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFCAF8DB2E07296700B0BED4 /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,10 +231,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFCAF8DA2E07296700B0BED4 /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CFCAF8D22E07287200B0BED4 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho \"Linting now\"\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n       swiftlint --fix && swiftlint lint --config \"$SRCROOT/.swiftlint.yml\"\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CFB3911D2E048EEC004165D4 /* Sources */ = {
@@ -237,6 +287,8 @@
 /* Begin XCBuildConfiguration section */
 		CFB3912E2E048EED004165D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = CFB391232E048EEC004165D4 /* Gander */;
+			baseConfigurationReferenceRelativePath = SupportFiles/AppConfig.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -298,6 +350,8 @@
 		};
 		CFB3912F2E048EED004165D4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = CFB391232E048EEC004165D4 /* Gander */;
+			baseConfigurationReferenceRelativePath = SupportFiles/AppConfig.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -361,7 +415,9 @@
 				DEVELOPMENT_TEAM = NPXX324A2L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gander/SupportFiles/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -370,8 +426,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -400,7 +456,9 @@
 				DEVELOPMENT_TEAM = NPXX324A2L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gander/SupportFiles/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -409,8 +467,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
