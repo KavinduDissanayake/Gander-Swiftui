@@ -9,7 +9,6 @@ import SwiftUI
 // MARK: - Sample Views
 struct LoginView: View {
     @AppStorage(CacheKeys.isAuthenticated) private var isAuthenticated: Bool = false
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         VStack(spacing: 32) {

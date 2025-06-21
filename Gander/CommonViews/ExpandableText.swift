@@ -68,7 +68,7 @@ import SwiftUI
                 }
             }
             .modifier(OverlayAdapter(alignment: .trailingLastTextBaseline, view: {
-                if shouldShowMoreButton {
+                if isTruncated {
                     Button {
                         withAnimation(expandAnimation) { isExpanded.toggle() }
                     } label: {
@@ -92,7 +92,7 @@ import SwiftUI
     }
 
     private var shouldShowMoreButton: Bool {
-        !isExpanded && isTruncated
+        isTruncated
     }
     
     private var textTrimmingDoubleNewlines: String {

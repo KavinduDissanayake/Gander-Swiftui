@@ -9,11 +9,12 @@ import SwiftUI
 
 struct FactCheckArticle: Identifiable, Codable {
     let id: UUID
-    let url: String
-    let headline: String
-    let bodyText: String
-    let imageURL: String?
+    var url: String
+    var headline: String
+    var bodyText: String
+    var imageURL: String?
     let dateSaved: Date
+    var dateLastRefreshed: Date? 
     var status: String?
     var rationale: String?
     var sources: [FactSource]?

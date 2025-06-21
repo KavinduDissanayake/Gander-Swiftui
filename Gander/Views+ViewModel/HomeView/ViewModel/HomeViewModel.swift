@@ -8,6 +8,8 @@
 // MARK: - Imports
 import SwiftUI
 import SwiftSoup
+import MijickPopups
+
 
 // MARK: - ViewModel
 @MainActor
@@ -39,8 +41,10 @@ class HomeViewModel: ObservableObject {
     init() {
         self.updateFilteredArticles()
     }
+}
 
-    // MARK: - Article Filtering
+// MARK: - Article Filtering & Storage
+extension HomeViewModel {
     func updateFilteredArticles() {
         filteredArticles = selectedLabel == "All"
             ? savedArticles.sorted { $0.dateSaved > $1.dateSaved }
@@ -55,8 +59,10 @@ class HomeViewModel: ObservableObject {
         }
         updateFilteredArticles()
     }
+}
 
-    // MARK: - Load & Scrape Article
+// MARK: - Article Loading & Scraping
+extension HomeViewModel {
     func loadArticle(from urlString: String) {
         guard let url = URL(string: urlString) else {
             handleError(APIClientError.invalidURL)
@@ -69,8 +75,10 @@ class HomeViewModel: ObservableObject {
         Task {
             do {
                 let article = try await scrapeArticle(from: url, urlString: urlString)
+                
                 if let existingIndex = savedArticles.firstIndex(where: { $0.url == urlString }) {
-                    savedArticles[existingIndex] = article
+                    let updated = updateExistingArticle(existing: savedArticles[existingIndex], with: article)
+                    savedArticles[existingIndex] = updated
                 } else {
                     savedArticles.insert(article, at: 0)
                 }
@@ -83,6 +91,15 @@ class HomeViewModel: ObservableObject {
         }
     }
 
+    private func updateExistingArticle(existing: FactCheckArticle, with newArticle: FactCheckArticle) -> FactCheckArticle {
+        var updated = existing
+        updated.headline = newArticle.headline
+        updated.bodyText = newArticle.bodyText
+        updated.imageURL = newArticle.imageURL
+        updated.dateLastRefreshed = Date()
+        return updated
+    }
+    
     private func scrapeArticle(from url: URL, urlString: String) async throws -> FactCheckArticle {
         let (data, _) = try await URLSession.shared.data(from: url)
         guard let htmlString = String(data: data, encoding: .utf8) else {
@@ -125,8 +142,10 @@ class HomeViewModel: ObservableObject {
             status: FactCheckStatus.reviewing.rawValue
         )
     }
+}
 
-    // MARK: - Submit Fact Check
+// MARK: - Fact Check Submission
+extension HomeViewModel {
     private func submitFactCheck(for article: FactCheckArticle) async {
         guard article.url.contains("nytimes.com") else {
             handleUnverifiableArticle(article)
@@ -158,7 +177,7 @@ class HomeViewModel: ObservableObject {
             handleError(error)
             handleUnknownStatus(article, error: error)
         }
-
+        clearInputFieldAndAlerts()
         isLoading = false
     }
 
@@ -194,8 +213,10 @@ class HomeViewModel: ObservableObject {
             sources: [fallbackSource]
         )
     }
+}
 
-    // MARK: - Status Updates
+// MARK: - Article Status Updates
+extension HomeViewModel {
     private func updateArticleStatus(articleId: UUID, status: FactCheckStatus, rationale: String, sources: [FactSource]) {
         if let index = savedArticles.firstIndex(where: { $0.id == articleId }) {
             savedArticles[index].status = status.rawValue
@@ -211,17 +232,29 @@ class HomeViewModel: ObservableObject {
             updateFilteredArticles()
         }
     }
+}
 
-    // MARK: - Utilities
+// MARK: - Error Handling
+extension HomeViewModel {
     private func handleError(_ error: Error) {
-        errorMessage = error.localizedDescription
+        let message = error.localizedDescription
+        errorMessage = message
+        AlertManager.showTopBanner("Error", message, type: .error)
         isLoading = false
     }
 
     func clearError() {
         errorMessage = nil
     }
+}
 
+// MARK: - UI Helpers
+extension HomeViewModel {
+    private func clearInputFieldAndAlerts() {
+        inputURL = ""
+        AlertManager.dismissAllAlerts()
+    }
+    
     func shareArticle(_ article: FactCheckArticle) {
         let shareText = "Fact-check result: \(article.headline) - \(article.factCheckStatus.displayName)"
         let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
@@ -231,7 +264,6 @@ class HomeViewModel: ObservableObject {
         }
     }
 
-    // MARK: - Sheet Presentation
     func presentInputBottomSheet() {
         Task {
             await FactCheckInputBottomSheet(

@@ -5,14 +5,19 @@
 //  Created by KavinduDissanayake on 2025-06-20.
 //
 
+import Foundation
+
+
+
 struct Constant {
+    
     enum Environment {
         case staging
         case qa
         case dev
         case prod
     }
-
+    
     static let environment: Environment = .dev
 
     static func isLoggingEnabled() -> Bool {
@@ -25,16 +30,10 @@ struct Constant {
     }
     
     static var anthropicAPIKey: String {
-        switch environment {
-        case .staging:
-            return "sk-staging-key"
-        case .qa:
-            return "sk-qa-key"
-        case .dev:
-            return "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"
-        case .prod:
-            return "sk-prod-key"
+        guard let key = Bundle.main.infoDictionary?["ANTHROPIC_API_KEY"] as? String else {
+            fatalError("ANTHROPIC_API_KEY not found in Info.plist")
         }
+        return key
     }
 
     static let factCheckPromptTemplate = """

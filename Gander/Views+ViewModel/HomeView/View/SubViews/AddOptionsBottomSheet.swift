@@ -48,6 +48,7 @@ struct AddOptionsBottomSheet: BottomPopup {
 
     func configurePopup(config: BottomPopupConfig) -> BottomPopupConfig {
         config
+        
             .heightMode(.auto)
             .backgroundColor(Color(uiColor: .secondarySystemBackground))
             .overlayColor(Color.black.opacity(0.3))
@@ -84,3 +85,4 @@ struct AddOptionsBottomSheet: BottomPopup {
 
 }
 #endif
+

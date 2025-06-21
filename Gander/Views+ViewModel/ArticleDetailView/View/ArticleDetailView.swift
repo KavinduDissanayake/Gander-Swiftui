@@ -9,7 +9,6 @@
 import SwiftUI
 import SwiftSoup
 
-
 struct ArticleDetailView: View {
     @Environment(\.dismiss) private var dismiss
     let article: FactCheckArticle?
