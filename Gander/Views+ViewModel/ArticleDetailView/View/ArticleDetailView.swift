@@ -50,7 +50,7 @@ struct ArticleDetailView: View {
                     }
                 }
             }
-            .padding(.all, 20)
+            .padding(.horizontal, 20)
             .navigationBarBackButtonHidden()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

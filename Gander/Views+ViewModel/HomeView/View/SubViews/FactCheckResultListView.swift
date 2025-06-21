@@ -7,7 +7,6 @@
 
 import SwiftUI
 import WaterfallGrid
-// MARK: - Main App with Tab Navigation
 
 struct FactCheckResultListView: View {
     @Binding var articles: [FactCheckArticle]
@@ -47,4 +46,15 @@ struct FactCheckResultListView: View {
         }
         .navigate(to: ArticleDetailView(article: viewModel.currentArticle), when: $viewModel.isNavigateToDetails)
     }
+}
+
+#Preview {
+    FactCheckResultListView(
+        articles: .constant([
+            FactCheckArticle.mock,
+            FactCheckArticle.mock,
+            FactCheckArticle.mock
+        ]),
+        viewModel: HomeViewModel()
+    )
 }
