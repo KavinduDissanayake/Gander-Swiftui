@@ -20,9 +20,6 @@ struct FactCheckArticlePreviewView: View {
                 .fontRegular(14)
                 .foregroundColor(.secondary)
         }
-        .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
     }
 }
 

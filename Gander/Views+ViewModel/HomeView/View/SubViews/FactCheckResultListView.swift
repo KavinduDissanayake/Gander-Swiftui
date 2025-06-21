@@ -42,6 +42,9 @@ struct FactCheckResultListView: View {
             )
             .padding()
         }
+        .refreshable {
+            viewModel.refreshArticles()
+        }
         .navigate(to: ArticleDetailView(article: viewModel.currentArticle), when: $viewModel.isNavigateToDetails)
     }
 }

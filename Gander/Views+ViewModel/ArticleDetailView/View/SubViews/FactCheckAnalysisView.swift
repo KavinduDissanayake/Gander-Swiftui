@@ -13,7 +13,8 @@ import SwiftUI
             Text(rationale)
                 .fontRegular(14)
                 .padding()
-                .background(Color(.systemGray6))
+                .foregroundStyle(.black)
+                .background(Color(.containerBackground))
                 .cornerRadius(12)
         }
     }

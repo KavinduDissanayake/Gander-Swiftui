@@ -50,6 +50,10 @@ extension HomeViewModel {
             : savedArticles.filter { $0.status == selectedLabel }.sorted { $0.dateSaved > $1.dateSaved }
     }
 
+    func refreshArticles() {
+        self.updateFilteredArticles()
+    }
+
     func deleteArticle(_ article: FactCheckArticle) {
         let updatedArticles = savedArticles.filter { $0.id != article.id }
         savedArticles = updatedArticles
@@ -76,12 +80,14 @@ extension HomeViewModel {
                 let article = try await scrapeArticle(from: url, urlString: urlString)
 
                 if let existingIndex = savedArticles.firstIndex(where: { $0.url == urlString }) {
-                    let updated = updateExistingArticle(existing: savedArticles[existingIndex], with: article)
+                    var updated = updateExistingArticle(existing: savedArticles[existingIndex], with: article)
+                    updated.status = FactCheckStatus.reviewing.rawValue
                     savedArticles[existingIndex] = updated
+                    self.currentArticle = updated
                 } else {
                     savedArticles.insert(article, at: 0)
+                    self.currentArticle = article
                 }
-                self.currentArticle = article
                 await submitFactCheck(for: article)
                 updateFilteredArticles()
             } catch {
@@ -145,6 +151,20 @@ extension HomeViewModel {
 
 // MARK: - Fact Check Submission
 extension HomeViewModel {
+
+    public func resumePendingFactChecks() {
+        Logger.log(logType: .info, title: "FactCheck", message: "Resuming pending fact checks if any")
+
+        Task {
+            for article in savedArticles where article.status == FactCheckStatus.reviewing.rawValue {
+                guard !isLoading else { break }
+                currentArticle = article
+                isLoading = true
+                await submitFactCheck(for: article)
+            }
+        }
+    }
+
     private func submitFactCheck(for article: FactCheckArticle) async {
         guard article.url.contains("nytimes.com") else {
             handleUnverifiableArticle(article)
@@ -171,6 +191,7 @@ extension HomeViewModel {
                 rationale: response.rationale ?? "",
                 sources: response.sources ?? []
             )
+            Logger.log(logType: .success, title: "FactCheck", message: "Fact check completed successfully for article: \(article.url)")
         } catch {
             Logger.log(logType: .error, title: "FactCheck", message: error.localizedDescription)
             handleError(error)

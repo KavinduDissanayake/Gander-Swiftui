@@ -41,6 +41,9 @@ struct HomeView: View {
             .vAlign(.bottom)
 
         }
+        .onAppear {
+            viewModel.resumePendingFactChecks()
+        }
         .applyHomeNavigationBarTool(viewModel: viewModel)
     }
 }

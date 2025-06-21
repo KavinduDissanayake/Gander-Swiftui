@@ -13,7 +13,7 @@ struct RemoteImageView: View {
     var width: CGFloat?
     var height: CGFloat?
     var cornerRadius: CGFloat = 0
-    var roundedCorners: UIRectCorner = []
+    var roundedCorners: UIRectCorner = [.allCorners]
 
     var body: some View {
         Group {

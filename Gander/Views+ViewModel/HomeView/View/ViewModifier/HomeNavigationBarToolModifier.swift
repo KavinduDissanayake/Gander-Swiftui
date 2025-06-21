@@ -16,7 +16,7 @@ struct HomeNavigationBarToolModifier: ViewModifier {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("Ganders")
-                        .font(.headline)
+                       .fontBold(24)
                 }
 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -30,13 +30,16 @@ struct HomeNavigationBarToolModifier: ViewModifier {
                             Text("Unknown").tag(FactCheckStatus.unknown.rawValue)
                         }
                     } label: {
-                        Image(systemName: "ellipsis")
+                        Image(.icDots)
+                            .renderingMode(.template)
+
                     }
 
                     Button(action: {
                         // Handle notification action
                     }) {
-                        Image(systemName: "bell")
+                        Image(.icNotification)
+                            .renderingMode(.template)
                     }
                 }
             }

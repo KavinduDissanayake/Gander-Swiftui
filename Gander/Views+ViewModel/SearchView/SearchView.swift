@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchView: View {
     var body: some View {
         VStack {
-            Text("Search View")
+            Text("Ganders View")
                 .font(.largeTitle)
         }
     }

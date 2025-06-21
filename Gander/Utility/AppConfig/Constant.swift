@@ -47,7 +47,7 @@ struct Constant {
     Then provide:
     1. A short rationale for your classification (2–3 sentences).
     2. List any specific factual claims that were verified or disputed.
-    3. Provide a list of sources used, including display metadata.
+    3. Provide a list of at least 4 credible sources used, including display metadata.
 
     Respond strictly in the following JSON format:
 

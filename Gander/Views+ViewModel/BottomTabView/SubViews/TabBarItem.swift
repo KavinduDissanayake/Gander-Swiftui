@@ -17,7 +17,8 @@ struct TabBarItem: View {
     var body: some View {
         Button(action: action) {
             VStack(spacing: 4) {
-                Image(systemName: isSelected ? (item.selectedIcon ?? item.icon) : item.icon)
+                Image(isSelected ? (item.selectedIcon ?? item.icon) : item.icon)
+                    .renderingMode(.template)
                     .fontRegular(16)
                     .foregroundColor(isSelected ? selectedColor : unselectedColor)
 

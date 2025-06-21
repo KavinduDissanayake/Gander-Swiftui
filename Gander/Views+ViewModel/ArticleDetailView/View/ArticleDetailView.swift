@@ -14,7 +14,7 @@ struct ArticleDetailView: View {
 
     var body: some View {
         if let article = article {
-            ScrollView {
+          ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 20) {
                     FactCheckImageHeaderView(
                         imageUrl: article.imageURL,
@@ -33,6 +33,8 @@ struct ArticleDetailView: View {
                         SourcesView(sources: sources)
                     }
 
+                    Spacer()
+
                     Button(action: {
                         shareResults(article)
                     }) {
@@ -42,13 +44,13 @@ struct ArticleDetailView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(Color.neutralBackground)
                         .foregroundColor(.white)
                         .cornerRadius(12)
                     }
                 }
-                .padding()
             }
+            .padding(.all, 20)
             .navigationBarBackButtonHidden()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
