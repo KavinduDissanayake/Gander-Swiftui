@@ -13,7 +13,7 @@ struct FactCheckResultListView: View {
     @ObservedObject var viewModel: HomeViewModel
 
     var body: some View {
-        ScrollView(showsIndicators: true) {
+        ScrollView(showsIndicators: false) {
             WaterfallGrid(viewModel.filteredArticles, id: \.id) { article in
                 FactCardView(
                     article: article,
