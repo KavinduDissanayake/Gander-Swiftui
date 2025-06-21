@@ -5,7 +5,6 @@
 //  Created by KavinduDissanayake on 2025-06-21.
 //
 
-
 // MARK: - Error Response Structure
 struct ErrorResponse: Codable, Error {
     let code: Int?

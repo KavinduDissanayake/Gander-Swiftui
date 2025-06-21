@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 extension View {
     /// Navigate to a new view.
     /// - Parameters:

@@ -13,7 +13,6 @@ struct FactCheckResultListView: View {
     @Binding var articles: [FactCheckArticle]
     @ObservedObject var viewModel: HomeViewModel
 
-
     var body: some View {
         ScrollView(showsIndicators: true) {
             WaterfallGrid(viewModel.filteredArticles, id: \.id) { article in
@@ -33,7 +32,7 @@ struct FactCheckResultListView: View {
                         viewModel.isNavigateToDetails.toggle()
                     }
                 )
-            
+
             }
             .gridStyle(
                 columnsInPortrait: 2,
@@ -46,4 +45,3 @@ struct FactCheckResultListView: View {
         .navigate(to: ArticleDetailView(article: viewModel.currentArticle), when: $viewModel.isNavigateToDetails)
     }
 }
-

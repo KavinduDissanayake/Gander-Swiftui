@@ -12,9 +12,6 @@ enum CacheKeys {
     static let articleHistory = "articleHistory"
 }
 
-
-
-
 // MARK: - Routing Enum
 enum Roots {
     case login
@@ -33,6 +30,3 @@ class ViewRouter: ObservableObject {
         currentRoot = isAuthenticated ? .bottomTabs : .login
     }
 }
-
-
-

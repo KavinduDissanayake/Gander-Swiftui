@@ -12,7 +12,7 @@ struct TabItem {
     let title: String
     let icon: String
     let selectedIcon: String?
-    
+
     init(id: Int, title: String, icon: String, selectedIcon: String? = nil) {
         self.id = id
         self.title = title

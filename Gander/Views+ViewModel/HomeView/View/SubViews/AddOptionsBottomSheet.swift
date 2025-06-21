@@ -8,7 +8,6 @@
 import SwiftUI
 import MijickPopups
 
-
 struct AddOptionRow: View {
     let icon: String
     let title: String
@@ -32,7 +31,7 @@ struct AddOptionRow: View {
 
                 Image(systemName: "chevron.right")
                     .foregroundColor(.tint)
-                   
+
             }
             .padding()
             .background(Color(uiColor: .systemGray6))
@@ -48,7 +47,7 @@ struct AddOptionsBottomSheet: BottomPopup {
 
     func configurePopup(config: BottomPopupConfig) -> BottomPopupConfig {
         config
-        
+
             .heightMode(.auto)
             .backgroundColor(Color(uiColor: .secondarySystemBackground))
             .overlayColor(Color.black.opacity(0.3))
@@ -85,4 +84,3 @@ struct AddOptionsBottomSheet: BottomPopup {
 
 }
 #endif
-

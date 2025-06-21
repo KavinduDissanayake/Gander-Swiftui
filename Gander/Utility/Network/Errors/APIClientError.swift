@@ -22,8 +22,6 @@ enum APIClientError: Error {
     case invalidURL
 }
 
-
-
 // MARK: - Localized Error Support
 extension APIClientError: LocalizedError {
     public var errorDescription: String? {

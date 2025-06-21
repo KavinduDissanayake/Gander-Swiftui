@@ -16,7 +16,7 @@ struct FactCheckArticlePreviewView: View {
             Text("Detailed Summary")
                 .font(.headline)
 
-            ExpandableText(bodyText)
+            ExpandableText(bodyText, lineLimit: 5)
                 .font(.body)
                 .foregroundColor(.secondary)
         }
@@ -32,4 +32,3 @@ struct FactCheckArticlePreviewView: View {
     This is a sample article body text used for preview purposes. It contains multiple lines of information that help visualize how the content will look in the app. The content should be truncated after 500 characters to simulate the real display logic. Additional text can be added here to ensure we test the ellipsis behavior effectively.
     """)
 }
-

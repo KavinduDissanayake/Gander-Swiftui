@@ -7,28 +7,25 @@
 
 import Foundation
 
-
+enum AppEnvironment {
+    case staging
+    case development
+    case production
+}
 
 struct Constant {
-    
-    enum Environment {
-        case staging
-        case qa
-        case dev
-        case prod
-    }
-    
-    static let environment: Environment = .dev
+
+    static let environment: AppEnvironment = .development
 
     static func isLoggingEnabled() -> Bool {
         switch environment {
-        case .staging, .qa, .dev:
+        case .staging, .development:
             return true
-        case .prod:
+        case .production:
             return false
         }
     }
-    
+
     static var anthropicAPIKey: String {
         guard let key = Bundle.main.infoDictionary?["ANTHROPIC_API_KEY"] as? String else {
             fatalError("ANTHROPIC_API_KEY not found in Info.plist")

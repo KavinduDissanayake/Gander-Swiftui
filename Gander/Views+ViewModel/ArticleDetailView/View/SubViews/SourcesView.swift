@@ -52,4 +52,3 @@ struct SourcesView: View {
 #Preview {
     SourcesView(sources: FactSource.mocks + FactSource.mocks)
 }
-

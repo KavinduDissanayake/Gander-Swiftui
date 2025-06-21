@@ -18,7 +18,7 @@ public final class AlertManager {
                                      isShowCloseIcon: Bool = false,
                                      onDismiss: (() -> Void)? = nil) {
         Task {
-            
+
             let data = BannerData(title: title,
                                   message: message,
                                   isShowCloseIcon: isShowCloseIcon,
@@ -29,8 +29,7 @@ public final class AlertManager {
                 .present()
         }
     }
-    
-    
+
     public static func dismissAllAlerts() {
         Task {
             await PopupStack.dismissAllPopups(popupStackID: .init(rawValue: "shared"))

@@ -5,7 +5,6 @@
 //  Created by KavinduDissanayake on 2025-06-20.
 //
 
-
 import SwiftUI
 import SwiftSoup
 
@@ -29,8 +28,7 @@ struct ArticleDetailView: View {
                     }
 
                     FactCheckArticlePreviewView(bodyText: article.bodyText)
-                    
-                    
+
                     if let sources = article.sources {
                         SourcesView(sources: sources)
                     }

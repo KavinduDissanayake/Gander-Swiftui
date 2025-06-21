@@ -13,8 +13,6 @@ struct FactCheckInputBottomSheet: BottomPopup {
     @Binding var inputURL: String
     @ObservedObject var viewModel: HomeViewModel
 
-    
-    
     func configurePopup(config: BottomPopupConfig) -> BottomPopupConfig {
         config
             .heightMode(.auto)
@@ -23,14 +21,12 @@ struct FactCheckInputBottomSheet: BottomPopup {
             .cornerRadius(16)
     }
 
-    
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Spacer()
                 Button(action: {
-                    Task{
+                    Task {
                         await dismissLastPopup()
                     }
                 }) {
@@ -120,5 +116,3 @@ struct FactCheckInputBottomSheet: BottomPopup {
         .padding(.bottom)
     }
 }
-
-

@@ -14,11 +14,11 @@ struct FactCheckArticle: Identifiable, Codable {
     var bodyText: String
     var imageURL: String?
     let dateSaved: Date
-    var dateLastRefreshed: Date? 
+    var dateLastRefreshed: Date?
     var status: String?
     var rationale: String?
     var sources: [FactSource]?
-    
+
     var factCheckStatus: FactCheckStatus {
         guard let status = status else { return .unknown }
         return FactCheckStatus(from: status)
@@ -63,21 +63,20 @@ enum FactCheckStatus: String, CaseIterable {
         case .unverified: return .carmineRed
         case .misinterpretation: return .sunsetOrange
         case .reviewing: return .blue
-        case .unknown: return .gray
+        case .unknown: return .carmineRed
         }
     }
-    
+
     var displayName: String {
         switch self {
         case .verified: return "Verified"
         case .unverified: return "Unverified"
         case .misinterpretation: return "Misinterpretation"
         case .reviewing: return "Reviewing"
-        case .unknown: return "Unknown"
+        case .unknown: return "Failed"
         }
     }
 }
-
 
 extension FactCheckArticle {
     static var mock: FactCheckArticle {

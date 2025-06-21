@@ -10,14 +10,14 @@ import SwiftUI
 // MARK: - Enhanced Components
 struct FactCardView: View {
     let article: FactCheckArticle
-    var onShare: (() -> Void)? = nil
-    var onRefresh: (() -> Void)? = nil
-    var onDelete: (() -> Void)? = nil
-    var onTap: (() -> Void)? = nil
+    var onShare: (() -> Void)?
+    var onRefresh: (() -> Void)?
+    var onDelete: (() -> Void)?
+    var onTap: (() -> Void)?
 
     var body: some View {
         VStack(spacing: 0) {
-            
+
             // Image Section
             RemoteImageView(imageURL: article.imageURL, cornerRadius: 0)
                 .aspectRatio(contentMode: .fill)
@@ -85,11 +85,9 @@ struct FactCardView: View {
     }
 }
 
-
-
 #Preview("FactCardView Variants") {
     ScrollView {
-        WaterfallGrid(FactCheckStatus.allCases, id: \.self) { status in
+        WaterfallGrid(FactCheckStatus.allCases, id: \.self) { _ in
             FactCardView(article: FactCheckArticle.mock)
                 .frame(width: 180)
                 .background(Color.white)
@@ -105,4 +103,3 @@ struct FactCardView: View {
         .padding()
     }
 }
-

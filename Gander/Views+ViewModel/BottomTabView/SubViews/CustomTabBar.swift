@@ -16,17 +16,16 @@ struct CustomTabBar: View {
     var selectedColor: Color = .tint
     var unselectedColor: Color = Color(.systemGray)
     var shadowColor: Color = Color.black.opacity(0.1)
-    
+
     var body: some View {
         VStack {
             Divider()
                 .frame(height: 1)
-            
-            
+
             HStack(spacing: 0) {
                 Spacer()
-                ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                    
+                ForEach(Array(items.enumerated()), id: \.element.id) { _, item in
+
                     TabBarItem(
                         item: item,
                         isSelected: selectedTab == item.id,

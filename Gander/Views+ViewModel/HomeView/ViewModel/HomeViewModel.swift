@@ -10,13 +10,12 @@ import SwiftUI
 import SwiftSoup
 import MijickPopups
 
-
 // MARK: - ViewModel
 @MainActor
 class HomeViewModel: ObservableObject {
 
     // MARK: - Published Properties
-    @Published var currentArticle: FactCheckArticle? = nil
+    @Published var currentArticle: FactCheckArticle?
     @Published var isLoading: Bool = false
     @Published var isNavigateToDetails: Bool = false
     @Published var filteredArticles: [FactCheckArticle] = []
@@ -75,7 +74,7 @@ extension HomeViewModel {
         Task {
             do {
                 let article = try await scrapeArticle(from: url, urlString: urlString)
-                
+
                 if let existingIndex = savedArticles.firstIndex(where: { $0.url == urlString }) {
                     let updated = updateExistingArticle(existing: savedArticles[existingIndex], with: article)
                     savedArticles[existingIndex] = updated
@@ -99,7 +98,7 @@ extension HomeViewModel {
         updated.dateLastRefreshed = Date()
         return updated
     }
-    
+
     private func scrapeArticle(from url: URL, urlString: String) async throws -> FactCheckArticle {
         let (data, _) = try await URLSession.shared.data(from: url)
         guard let htmlString = String(data: data, encoding: .utf8) else {
@@ -206,10 +205,12 @@ extension HomeViewModel {
             thumbnailImageURL: article.imageURL ?? "",
             url: article.url
         )
+        let message = error.localizedDescription
+
         updateArticleStatus(
             articleId: article.id,
             status: .unknown,
-            rationale: "Error occurred during fact-checking: \(error.localizedDescription)",
+            rationale: "Error occurred during fact-checking: \(message)",
             sources: [fallbackSource]
         )
     }
@@ -254,7 +255,7 @@ extension HomeViewModel {
         inputURL = ""
         AlertManager.dismissAllAlerts()
     }
-    
+
     func shareArticle(_ article: FactCheckArticle) {
         let shareText = "Fact-check result: \(article.headline) - \(article.factCheckStatus.displayName)"
         let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
