@@ -13,6 +13,7 @@ struct RemoteImageView: View {
     var width: CGFloat?
     var height: CGFloat?
     var cornerRadius: CGFloat = 0
+    var roundedCorners: UIRectCorner = []
 
     var body: some View {
         Group {
@@ -23,13 +24,12 @@ struct RemoteImageView: View {
                         Rectangle()
                             .fill(Color.gray.opacity(0.3))
                             .overlay(ProgressView())
-                            .cornerRadius(cornerRadius)
+                            .clipShape(RoundedCorner(radius: cornerRadius, corners: roundedCorners))
                     case .success(let image):
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .clipped()
-                            .cornerRadius(cornerRadius)
+                            .clipShape(RoundedCorner(radius: cornerRadius, corners: roundedCorners))
                     case .failure:
                         Rectangle()
                             .fill(Color.gray.opacity(0.3))
@@ -38,7 +38,7 @@ struct RemoteImageView: View {
                                     .font(.largeTitle)
                                     .foregroundColor(.gray)
                             )
-                            .cornerRadius(cornerRadius)
+                            .clipShape(RoundedCorner(radius: cornerRadius, corners: roundedCorners))
                     @unknown default:
                         EmptyView()
                     }
@@ -51,7 +51,7 @@ struct RemoteImageView: View {
                             .font(.largeTitle)
                             .foregroundColor(.gray)
                     )
-                    .cornerRadius(cornerRadius)
+                    .clipShape(RoundedCorner(radius: cornerRadius, corners: roundedCorners))
             }
         }
         .frame(width: width, height: height)

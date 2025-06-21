@@ -17,7 +17,7 @@ struct FactCheckArticlePreviewView: View {
                 .font(.headline)
 
             ExpandableText(bodyText, lineLimit: 5)
-                .font(.body)
+                .fontRegular(14)
                 .foregroundColor(.secondary)
         }
         .padding()

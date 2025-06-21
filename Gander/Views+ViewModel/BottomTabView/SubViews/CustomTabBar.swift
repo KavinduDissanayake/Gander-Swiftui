@@ -18,14 +18,15 @@ struct CustomTabBar: View {
     var shadowColor: Color = Color.black.opacity(0.1)
 
     var body: some View {
-        VStack {
+        VStack(spacing: .zero) {
             Divider()
                 .frame(height: 1)
 
-            HStack(spacing: 0) {
-                Spacer()
-                ForEach(Array(items.enumerated()), id: \.element.id) { _, item in
+            Spacer.height(5)
 
+            HStack(spacing: 0) {
+
+                ForEach(Array(items.enumerated()), id: \.element.id) { _, item in
                     TabBarItem(
                         item: item,
                         isSelected: selectedTab == item.id,
@@ -35,9 +36,10 @@ struct CustomTabBar: View {
                         selectedTab = item.id
                     }
                 }
-                Spacer()
+
             }
             .frame(height: tabBarHeight)
+            .padding(.horizontal, 60)
         }
     }
 }

@@ -21,13 +21,11 @@ struct HomeView: View {
                     EmptyStatePlaceholder()
                 } else {
                     Text("Recent Fact Checks")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .fontSemiBold(17)
+                        .hLeading()
                         .padding(.horizontal)
 
                     FactCheckResultListView(articles: $viewModel.savedArticles, viewModel: viewModel)
-
-                    Spacer()
                 }
             }
 

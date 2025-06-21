@@ -13,7 +13,7 @@ import SwiftUI
         HStack {
             Image(systemName: status.iconName)
             Text(status.displayName)
-                .fontWeight(.semibold)
+                .fontSemiBold(14)
             Spacer()
         }
         .foregroundColor(.white)

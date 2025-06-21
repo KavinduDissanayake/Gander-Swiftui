@@ -27,24 +27,22 @@ struct FactCardView: View {
             // Content Section
             VStack(alignment: .leading, spacing: 6) {
                 Text(article.headline)
-                    .font(.headline)
+                    .fontSemiBold(17)
                     .foregroundColor(.primary)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.bottom, 2)
 
                 Text(article.dateSaved.formatted(date: .abbreviated, time: .shortened))
-                    .font(.caption)
+                    .fontRegular(12)
                     .foregroundColor(.secondary)
             }
             .padding(.horizontal)
             .padding(.top, 8)
-            .frame(maxWidth: .infinity, alignment: .leading)
 
             // Status Section
             HStack {
                 Text(article.factCheckStatus.displayName)
-                    .font(.caption)
-                    .bold()
+                    .fontSemiBold(12)
                     .foregroundColor(.white)
 
                 Spacer()
@@ -57,9 +55,8 @@ struct FactCardView: View {
             .background(article.factCheckStatus.color)
         }
         .frame(minWidth: 170)
-        .background(Color(.systemBackground))
+        .background(.lightBackgroundGray)
         .cornerRadius(16)
-        .shadow(radius: 4)
         .contextMenu {
             Button {
                 onShare?()
@@ -83,6 +80,7 @@ struct FactCardView: View {
             onTap?()
         }
     }
+
 }
 
 #Preview("FactCardView Variants") {
@@ -92,7 +90,6 @@ struct FactCardView: View {
                 .frame(width: 180)
                 .background(Color.white)
                 .cornerRadius(12)
-                .shadow(radius: 2)
         }
         .gridStyle(
             columnsInPortrait: 2,

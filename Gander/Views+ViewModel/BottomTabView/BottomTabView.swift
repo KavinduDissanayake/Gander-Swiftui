@@ -18,7 +18,7 @@ struct BottomTabView: View {
     ]
 
     var body: some View {
-        VStack {
+        VStack(spacing: .zero) {
             // Your main content here
             TabView(selection: $selectedTab) {
                 HomeView()
@@ -32,15 +32,13 @@ struct BottomTabView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 
-            Spacer()
-
             // Custom Tab Bar
             CustomTabBar(
                 selectedTab: $selectedTab,
                 items: tabItems
             )
         }
-        .background(Color(.systemGray6))
+        .background(Color.background)
         .ignoresSafeArea(.keyboard)
         .tint(.tint)
     }

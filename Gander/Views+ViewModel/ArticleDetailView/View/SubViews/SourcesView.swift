@@ -14,7 +14,7 @@ struct SourcesView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Sources")
-                .font(.headline)
+                .fontSemiBold(17)
 
             ForEach(sources.prefix(maxDisplay), id: \.url) { source in
                 SourceRowView(source: source)
@@ -23,7 +23,7 @@ struct SourcesView: View {
             if sources.count > maxDisplay {
                 HStack(spacing: 8) {
                     Text("Other Sources")
-                        .font(.subheadline)
+                        .fontMedium(15)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
 
@@ -33,7 +33,7 @@ struct SourcesView: View {
                             RemoteImageView(imageURL: source.sourceImageURL ?? "", cornerRadius: 999)
                                 .frame(width: 36, height: 36)
                             Text("\(index + 1)")
-                                .font(.caption2)
+                                .fontRegular(11)
                                 .foregroundColor(.white)
                         }
                     }

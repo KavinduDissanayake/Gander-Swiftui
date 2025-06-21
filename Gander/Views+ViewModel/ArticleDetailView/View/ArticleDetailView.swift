@@ -56,6 +56,7 @@ struct ArticleDetailView: View {
                         dismiss()
                     }) {
                         Label("Back", systemImage: "chevron.left")
+                            .fontSemiBold(17)
                     }
                 }
             }
