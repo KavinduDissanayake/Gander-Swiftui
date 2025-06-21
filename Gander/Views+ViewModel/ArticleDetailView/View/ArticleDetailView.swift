@@ -39,7 +39,9 @@ struct ArticleDetailView: View {
                         shareResults(article)
                     }) {
                         HStack {
-                            Image(systemName: "square.and.arrow.up")
+                            Image(.icShare)
+                                .renderingMode(.template)
+
                             Text("Share Results")
                         }
                         .frame(maxWidth: .infinity)
