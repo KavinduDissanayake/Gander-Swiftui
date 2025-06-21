@@ -16,7 +16,8 @@ struct SourceRowView: View {
                 .frame(width: 32, height: 32)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(source.title ?? "Unknown Title")
+                Text(source.title.orUnknownTitle)
+                    .multilineTextAlignment(.leading)
                     .fontSemiBold(15)
 
                 Text(source.date ?? "")
