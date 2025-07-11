@@ -134,6 +134,8 @@
 				CFB3911E2E048EEC004165D4 /* Frameworks */,
 				CFB3911F2E048EEC004165D4 /* Resources */,
 				CFCAF8D22E07287200B0BED4 /* SwiftLint */,
+				CFB462C72E218599006BD591 /* Find Google-info */,
+				CFB462CF2E2187B1006BD591 /* Upload dSYMs */,
 			);
 			buildRules = (
 			);
@@ -245,6 +247,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		CFB462C72E218599006BD591 /* Find Google-info */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Find Google-info";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# 📄 Type a script or drag a script file from your workspace to insert its path.\nenvironment=\"default\"\n\n# 🧠 Regex to extract the scheme name from the Build Configuration\n# 🧩 We have named our Build Configurations as Debug-dev, Debug-prod etc.\n# 🧪 Here, dev and prod are the scheme names. This kind of naming is required by Flutter for flavors to work.\n# 🔍 We are using the $CONFIGURATION variable available in the XCode build environment to extract \n# the environment (or flavor)\n# 🧾 For eg.\n# If CONFIGURATION=\"Debug-prod\", then environment will get set to \"prod\".\nif [[ $CONFIGURATION =~ -([^-]*)$ ]]; then\n  environment=${BASH_REMATCH[1]}\nfi\n\necho \"🧭 Current environment: $environment\"\n\n# 📍 Name and path of the resource we're copying\nGOOGLESERVICE_INFO_PLIST=GoogleService-Info.plist\nGOOGLESERVICE_INFO_FILE=${PROJECT_DIR}/Gander/SupportFiles/Firebase/${environment}/${GOOGLESERVICE_INFO_PLIST}\n\n# 📡 Make sure GoogleService-Info.plist exists\nif [ ! -f \"$GOOGLESERVICE_INFO_FILE\" ]; then\n  echo \"⚠️ ${GOOGLESERVICE_INFO_FILE} not found. Falling back to default plist...\"\n  GOOGLESERVICE_INFO_FILE=${PROJECT_DIR}/Gander/SupportFiles/Firebase/Default/${GOOGLESERVICE_INFO_PLIST}\n  \n  if [ ! -f \"$GOOGLESERVICE_INFO_FILE\" ]; then\n    echo \"❌ Neither environment-specific nor default GoogleService-Info.plist found. Exiting.\"\n    exit 1\n  fi\nfi\n\n# 🗂️ Get a reference to the destination location for the GoogleService-Info.plist\n# 📦 This is the default location where Firebase init code expects to find it\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\n\necho \"📁 Attempting to copy ${GOOGLESERVICE_INFO_PLIST} to: ${PLIST_DESTINATION}\"\nif cp \"${GOOGLESERVICE_INFO_FILE}\" \"${PLIST_DESTINATION}\"; then\n  echo \"✅ Successfully copied ${GOOGLESERVICE_INFO_PLIST} 🎉\"\nelse\n  echo \"⚠️ Warning: Failed to copy ${GOOGLESERVICE_INFO_PLIST}, but continuing... ⚠️\"\nfi\n";
+		};
+		CFB462CF2E2187B1006BD591 /* Upload dSYMs */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Upload dSYMs";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Typeecho \"📦 [Script] Firebase dSYM Upload (Swift Package) — Start\"\n\n\n# 🔍 Determine environment from build configuration\nenvironment=\"default\"\nif [[ $CONFIGURATION =~ -([^-]*)$ ]]; then\n  environment=${BASH_REMATCH[1]}\nfi\necho \"🧭 Current environment: $environment\"\n\n# 📍 Construct GoogleService-Info.plist path\nGOOGLE_SERVICE_INFO_PLIST_PATH=\"${SRCROOT}/Gander/SupportFiles/Firebase/${environment}/GoogleService-Info.plist\"\nif [ ! -f \"$GOOGLE_SERVICE_INFO_PLIST_PATH\" ]; then\n  echo \"⚠️ ${GOOGLE_SERVICE_INFO_PLIST_PATH} not found. Falling back to default plist...\"\n  GOOGLE_SERVICE_INFO_PLIST_PATH=\"${SRCROOT}/Gander/SupportFiles/Firebase/Default/GoogleService-Info.plist\"\n\n  if [ ! -f \"$GOOGLE_SERVICE_INFO_PLIST_PATH\" ]; then\n    echo \"❌ [Error] GoogleService-Info.plist not found in either environment or default location.\"\n    exit 1\n  fi\nfi\n\n# Firebase SPM Crashlytics run script path\nFIREBASE_CRASHLYTICS_RUN_SCRIPT=\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n\n# Ensure plist is found\nif [ -z \"$GOOGLE_SERVICE_INFO_PLIST_PATH\" ]; then\n  echo \"❌ [Error] GoogleService-Info.plist not found.\"\n  exit 1\nfi\n\n# Only run for Archive builds\nif [ \"$ACTION\" = \"install\" ]; then\n  echo \"📦 Archive build detected. Running Crashlytics upload...\"\n  \n  if [ -x \"$FIREBASE_CRASHLYTICS_RUN_SCRIPT\" ]; then\n    \"$FIREBASE_CRASHLYTICS_RUN_SCRIPT\"\n    echo \"✅ [Success] Crashlytics script executed (SPM).\"\n  else\n    echo \"❌ [Error] Firebase Crashlytics script not found at:\"\n    echo \"    $FIREBASE_CRASHLYTICS_RUN_SCRIPT\"\n    exit 1\n  fi\nelse\n  echo \"ℹ️ Not an Archive build (ACTION=$ACTION). Skipping upload.\"\nfi\n\necho \"🏁 [Script Complete]\" a script or drag a script file from your workspace to insert its path.\n";
+		};
 		CFCAF8D22E07287200B0BED4 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
