@@ -9,3 +9,10 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 ANTHROPIC_API_KEY=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
+//MARK: - App Name
+APP_NAME = $(PRODUCT_NAME)
+APP_VERSION = 0.0.1
+APP_ICON = AppIcon-dev
+APP_BUILD_NUMBER = 1
+APP_FLAVOR = Production
+APP_BUNDLE_ID = com.gander.app

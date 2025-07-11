@@ -2,7 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>ANTHROPIC_API_KEY</key>
-    <string>$(ANTHROPIC_API_KEY)</string>
+	<key>AppConfig</key>
+	<array>
+		<string>APP_NAME</string>
+		<string>${APP_NAME}</string>
+		<string>APP_VERSION</string>
+		<string>${APP_VERSION}</string>
+		<string>APP_BUILD_NUMBER</string>
+		<string>${APP_BUILD_NUMBER}</string>
+		<string>APP_FLAVOR</string>
+		<string>${APP_FLAVOR}</string>
+		<string>APP_BUNDLE_ID</string>
+		<string>${APP_BUNDLE_ID}</string>
+		<string>ANTHROPIC_API_KEY</string>
+		<string>$(ANTHROPIC_API_KEY)</string>
+	</array>
 </dict>
 </plist>
